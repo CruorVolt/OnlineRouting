@@ -27,7 +27,7 @@ if (isset($_SESSION['edges'])) { $edges = $_SESSION['edges']; }
 //Paint the points
 foreach ($vertices as $point) {
 	ImageFilledEllipse($image, $point->coords()["x"], 
-		$point->coords()["y"], 5, 5, $blue);
+		$point->coords()["y"], 6, 6, $blue);
 }
 
 //Paint the edges

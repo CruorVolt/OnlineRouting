@@ -53,6 +53,16 @@ class Graph {
 
 	//Counter-clockwise radial sorting for use with Gift-Wrapping Hull procedure
 	public function sortRadially() {
+		$lowestVertex = $this->getLowestVertex();
+		$pivotVertex = $this->vertices[0];
+		$lower = array();
+		$upper = array();
+		foreach ($this->vertices as $vertex) {
+			//TODO here
+		}
+	}
+
+	public function addHull() {
 	}
 
 } ?>
