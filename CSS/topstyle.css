@@ -1,14 +1,16 @@
 body { 
 	background-color:#00222B; 
-	color:red;
+	color:#80E5FF;
 	font-family:"Helvetica";
+	font-weight:bold;
 }
-
+a {
+	color:#FF5555;
+}
 h1
 {
-color:orange;
+color:#FF0000;
 text-align:center;
-font-family:"Helvetica";
 }
 
 p

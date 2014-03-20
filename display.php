@@ -9,22 +9,18 @@ header('content-type: image/png');
 session_start();
  
 //Image
-if (isset($_SESSION['imagesize'])) {
-	$size = $_SESSION['imagesize'];
-} else {
-	$size = 500;
-}
+$size = isset($_SESSION['imagesize']) ? $_SESSION['imagesize'] : 500;
 $image = imagecreate($size, $size);
  
 //Colors
-$white = imagecolorallocate($image, 255, 255, 255);
-$black = imagecolorallocate($image, 0, 0, 0);
+$back = imagecolorallocate($image, 0, 34, 43);
+$fore = imagecolorallocate($image, 255, 0, 0);
 
 //border
-imageLine($image,0,0,0,500, $black);
-imageLine($image,0,0,500,0, $black);
-imageLine($image,499,499,0,499, $black);
-imageLine($image,499,499,499,0, $black);
+imageLine($image,0,0,0,$size, $fore);
+imageLine($image,0,0,$size,0, $fore);
+imageLine($image,$size-1,$size-1,0,$size-1, $fore);
+imageLine($image,$size-1,$size-1,$size-1,0, $fore);
 
 //Graph Data
 if (isset($_SESSION['vertices'])) { $vertices = $_SESSION['vertices']; }
@@ -35,7 +31,7 @@ if (isset($_SESSION['edges'])) { $edges = $_SESSION['edges']; }
 //Paint the points
 foreach ($vertices as $point) {
 	ImageFilledEllipse($image, $point->coords()["x"], 
-		$point->coords()["y"], 5, 5, $black);
+		$point->coords()["y"], 5, 5, $fore);
 }
 
 //Paint the edges
@@ -44,7 +40,7 @@ foreach ($edges as $line) {
 	ImageLine( $image, 
 		$coords["v1"]["x"], $coords["v1"]["y"],
 		$coords["v2"]["x"], $coords["v2"]["y"],
-	       	$black );
+	       	$fore );
 }
 
 imagepng($image);

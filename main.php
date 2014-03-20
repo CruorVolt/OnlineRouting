@@ -27,7 +27,7 @@
 ?>
 
 
-<form>
+<form action="results.php" method="post">
 	<!-- Image Size -->
 	Graph Display Size (in pixels):
 	<input type="range" name="maxsize" min="100" max="1000" step="10"
@@ -41,12 +41,15 @@
 	<input type="range" name="points" min="5" max="100" step="5"
 		onchange="displayPoints(this.value)">
 	<span id="numberofpoints">55</span>
+
+	</br>
+
+	<input type="submit" value="Process Graph">
 	
 </form>
 
 
 </br>
-<a href = "results.php"> PROCESS GRAPH </a>
 </br>
 </body
 </html>
