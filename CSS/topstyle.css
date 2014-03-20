@@ -3,17 +3,26 @@ body {
 	color:#80E5FF;
 	font-family:"Helvetica";
 	font-weight:bold;
+	text-align:center;
 }
+
+table {
+	width: 400px;
+	margin: 10px auto;
+}
+
+.button {
+	background-color:#00222B;
+	border: 2px solid #FF0000;
+	color:#80E5FF;
+	font-weight:bold;
+}
+
 a {
 	color:#FF5555;
 }
-h1
-{
-color:#FF0000;
-text-align:center;
-}
 
-p
-{
-font-family:"Helvetica";
+h1 {
+	color:#FF0000;
+	text-align:center;
 }

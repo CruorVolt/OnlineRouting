@@ -1,6 +1,6 @@
 <?
-	include_once 'Graph.php';
-	include_once 'Vertex.php';
+	include_once 'GraphClass/Graph.php';
+	include_once 'GraphClass/Vertex.php';
 	session_start();
 ?>
 
@@ -24,6 +24,14 @@
 	$graph->postGraph();
 ?>
 
-<?="</br>END RESULTS"?>
 </br>
-<a href="main.php"> BACK TO FORM </a>
+
+<form action="results.php" method="post">
+<input type="hidden" name="maxsize" value=<?= $imagesize ?> >
+<input type="hidden" name="points" value=<?= $n ?> >
+<input class="button" value="RE-GENERATE" type="submit">
+</form>
+
+<form action="main.php" method="post">
+<input class="button" value="BACK TO FORM" type="submit">
+</form>

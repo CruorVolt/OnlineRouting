@@ -1,7 +1,7 @@
 <?php
 
-include_once 'Vertex.php';
-include_once 'Edge.php';
+include_once 'GraphClass/Vertex.php';
+include_once 'GraphClass/Edge.php';
 
 ini_set ("display_errors", "1");
 error_reporting(E_ALL);
@@ -14,13 +14,14 @@ $image = imagecreate($size, $size);
  
 //Colors
 $back = imagecolorallocate($image, 0, 34, 43);
-$fore = imagecolorallocate($image, 255, 0, 0);
+$red = imagecolorallocate($image, 255, 0, 0);
+$blue = imagecolorallocate($image, 128, 229, 255);
 
 //border
-imageLine($image,0,0,0,$size, $fore);
-imageLine($image,0,0,$size,0, $fore);
-imageLine($image,$size-1,$size-1,0,$size-1, $fore);
-imageLine($image,$size-1,$size-1,$size-1,0, $fore);
+imageLine($image,0,0,0,$size, $red);
+imageLine($image,0,0,$size,0, $red);
+imageLine($image,$size-1,$size-1,0,$size-1, $red);
+imageLine($image,$size-1,$size-1,$size-1,0, $red);
 
 //Graph Data
 if (isset($_SESSION['vertices'])) { $vertices = $_SESSION['vertices']; }
@@ -31,7 +32,7 @@ if (isset($_SESSION['edges'])) { $edges = $_SESSION['edges']; }
 //Paint the points
 foreach ($vertices as $point) {
 	ImageFilledEllipse($image, $point->coords()["x"], 
-		$point->coords()["y"], 5, 5, $fore);
+		$point->coords()["y"], 5, 5, $blue);
 }
 
 //Paint the edges
@@ -40,7 +41,7 @@ foreach ($edges as $line) {
 	ImageLine( $image, 
 		$coords["v1"]["x"], $coords["v1"]["y"],
 		$coords["v2"]["x"], $coords["v2"]["y"],
-	       	$fore );
+	       	$red );
 }
 
 imagepng($image);
