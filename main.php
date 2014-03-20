@@ -23,7 +23,7 @@
 
 <body>
 <?
-	echo "<h1>LANDING PAGE</h1>"
+	echo "<h2>ONLINE ROUTING</h2>";
 ?>
 
 
@@ -40,7 +40,7 @@
 	    </td>
 	  </tr> <tr>
 	    <td>
-		Number of Vertices:
+		Vertices:
 	    </td> <td>
 		<input type="range" name="points" min="5" max="100" step="5"
 			onchange="displayPoints(this.value)">

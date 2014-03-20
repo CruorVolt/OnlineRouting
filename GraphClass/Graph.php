@@ -27,7 +27,7 @@ class Graph {
 	}
 
 	public function getVertices() {
-		return $this->vertices();
+		return $this->vertices;
 	}
 
 	private function storeGraph() {
@@ -38,6 +38,21 @@ class Graph {
 	public function postGraph() {
 		$this->storeGraph();
 		echo "<img src='display.php' alt='graph'>";
+	}
+
+	public function getLowestVertex() {
+		$min_y = $this->vertices[0];
+		foreach ($this->vertices as &$vertex) {
+			// "Lowest" vertex has LARGEST y-coordinate value
+			if ( $vertex->coords()["y"] > $min_y->coords()["y"] ) {
+				$min_y = $vertex;
+			}
+		}
+		return $min_y;
+	}
+
+	//Counter-clockwise radial sorting for use with Gift-Wrapping Hull procedure
+	public function sortRadially() {
 	}
 
 } ?>

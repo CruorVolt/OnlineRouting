@@ -7,10 +7,13 @@ body {
 }
 
 table {
-	width: 400px;
+	table-layout:fixed;
+	white-space:nowrap;
+	width: 500px;
 	margin: 10px auto;
 	font-weight:bold;
 }
+
 
 .button {
 	background-color:#00222B;
@@ -30,6 +33,11 @@ a {
 }
 
 h1 {
+	color:#FF0000;
+	text-align:center;
+}
+
+h2 {
 	color:#FF0000;
 	text-align:center;
 }

@@ -11,6 +11,7 @@ session_start();
 //Image
 $size = isset($_SESSION['imagesize']) ? $_SESSION['imagesize'] : 500;
 $image = imagecreate($size, $size);
+imagesetthickness($image, 2);
  
 //Colors
 $back = imagecolorallocate($image, 0, 34, 43);
@@ -39,10 +40,10 @@ foreach ($edges as $line) {
 }
 
 //border
-imageLine($image,0,0,0,$size, $red);
-imageLine($image,0,0,$size,0, $red);
-imageLine($image,$size-1,$size-1,0,$size-1, $red);
-imageLine($image,$size-1,$size-1,$size-1,0, $red);
+//imageLine($image,0,0,0,$size, $red);
+//imageLine($image,0,0,$size,0, $red);
+//imageLine($image,$size-1,$size-1,0,$size-1, $red);
+//imageLine($image,$size-1,$size-1,$size-1,0, $red);
 
 imagepng($image);
 imagedestroy($image);

@@ -16,10 +16,14 @@
 	$graph = new Graph(array(), array());
 
 	for ($i = 1; $i <= $n; $i++) {
-		$x = rand(1, $imagesize-1);
-		$y = rand(1, $imagesize-1);
+		$x = rand(2, $imagesize-2);
+		$y = rand(2, $imagesize-2);
 		$graph->addVertex( new Vertex($x, $y) );
 	}
+
+	$bottom = $graph->getLowestVertex();
+	$graph->addEdge( new Edge($bottom, $graph->getVertices()[0] ) );
+	$graph->addEdge( new Edge($bottom, $graph->getVertices()[1] ) );
 
 	$graph->postGraph();
 ?>
