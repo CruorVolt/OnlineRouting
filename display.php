@@ -17,12 +17,6 @@ $back = imagecolorallocate($image, 0, 34, 43);
 $red = imagecolorallocate($image, 255, 0, 0);
 $blue = imagecolorallocate($image, 128, 229, 255);
 
-//border
-imageLine($image,0,0,0,$size, $red);
-imageLine($image,0,0,$size,0, $red);
-imageLine($image,$size-1,$size-1,0,$size-1, $red);
-imageLine($image,$size-1,$size-1,$size-1,0, $red);
-
 //Graph Data
 if (isset($_SESSION['vertices'])) { $vertices = $_SESSION['vertices']; }
 	else { $vertices = array(); }
@@ -43,6 +37,12 @@ foreach ($edges as $line) {
 		$coords["v2"]["x"], $coords["v2"]["y"],
 	       	$red );
 }
+
+//border
+imageLine($image,0,0,0,$size, $red);
+imageLine($image,0,0,$size,0, $red);
+imageLine($image,$size-1,$size-1,0,$size-1, $red);
+imageLine($image,$size-1,$size-1,$size-1,0, $red);
 
 imagepng($image);
 imagedestroy($image);

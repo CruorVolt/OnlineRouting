@@ -9,6 +9,7 @@ body {
 table {
 	width: 400px;
 	margin: 10px auto;
+	font-weight:bold;
 }
 
 .button {
@@ -16,6 +17,12 @@ table {
 	border: 2px solid #FF0000;
 	color:#80E5FF;
 	font-weight:bold;
+}
+
+input[type=range] {
+	-webkit-appearance: none !important;
+	background:#800000;
+	border: 1px solid #FF0000;
 }
 
 a {
