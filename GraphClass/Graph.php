@@ -97,14 +97,15 @@ class Graph {
 	public function addHull() {
 		$lowest = $this->getLowestVertex();
 		$current = $lowest;
-		$next = $this->getNextRadialVertex($lowest, 0);
-		$next_vertex = $next["vertex"];
-		$next_angle = $next["angle"];
-		for ($i = 0; $i<=4; $i++) {
+		$angle = 0;
+		do {
+			$next = $this->getNextRadialVertex($current, $angle);
+			$next_vertex = $next["vertex"];
+			$next_angle = $next["angle"];
 			$this->addEdge(new Edge($current, $next_vertex));
 			$current = $next_vertex;
-			$next = $this->getNextRadialVertex($next_vertex, $next_angle);
-		}
+			$angle = $next_angle;
+		} while ($current != $lowest);
 	}
 
 } ?>
