@@ -20,10 +20,8 @@
 		$y = rand(2, $imagesize-2);
 		$graph->addVertex( new Vertex($x, $y) );
 	}
-
-	$bottom = $graph->getLowestVertex();
-	$graph->addEdge( new Edge($bottom, $graph->getVertices()[0] ) );
-	$graph->addEdge( new Edge($bottom, $graph->getVertices()[1] ) );
+	
+	$graph->addHull();
 
 	$graph->postGraph();
 ?>
