@@ -53,7 +53,6 @@ class Graph {
 					$min_y = $vertex;
 			}
 		}
-		print_r($min_y->coords());
 		return $min_y;
 	}
 
@@ -64,9 +63,6 @@ class Graph {
 		$current_x = $current->coords()["x"];
 		$current_y = $current->coords()["y"];
 		$epsilon = .001;
-		//echo "STARTING THETA: ".$min_angle."</br>";
-		//echo "STARTING X: ".$current_x."</br>";
-		//echo "STARTING Y: ".$current_y."</br> </br>";
 		foreach ($this->vertices as $vertex) {
 			if ($vertex != $current) {
 				$vertex_x = $vertex->coords()["x"];
@@ -74,13 +70,6 @@ class Graph {
 				$diff_x = abs($current_x - $vertex_x);
 				$diff_y = abs($current_y - $vertex_y);
 				$hypotenuse = sqrt( pow($diff_x, 2) + pow($diff_y, 2) );
-
-				//echo "this x: " . $vertex_x . "</br>";
-				//echo "this y: " . $vertex_y . "</br>";
-				//echo "LENGTH: " . $diff_x . "</br>";
-				//echo "HEIGHT: " . $diff_y . "</br>";
-				//echo "HYPOTENUSE: " . $hypotenuse . "</br>";
-
 				if ( ($vertex_x>$current_x) && ($vertex_y<=$current_y) ) {
 					$theta = asin($diff_y/$hypotenuse);
 				} else if ( ($vertex_x<=$current_x) && ($vertex_y<$current_y) ) {
@@ -91,13 +80,9 @@ class Graph {
 					$theta = asin($diff_x/$hypotenuse) + ((3/2) * pi());
 				}
 
-				//echo "ANGLE: " . $theta . "</br>";
-				//echo "Last-angle: " .$last_angle . "</br>";
-				//echo "min-angle: " .$min_angle . "</br>";
 				if (($theta < $min_angle) && ($theta >= $last_angle)) {
 					$min_angle_vertex = $vertex;
 					$min_angle = $theta;
-					//echo "new min angle at (".$vertex_x.", ".$vertex_y.")";
 				}
 			}
 		}
@@ -112,14 +97,12 @@ class Graph {
 		do {
 			$next = $this->getNextRadialVertex($current, $angle);
 			$next_vertex = $next["vertex"];
-			//echo "Next Vertex is: (". $next_vertex->coords()["x"] . ", " . $next_vertex->coords()["y"] . ") </br>";
 			$next_angle = $next["angle"];
 			$this->addEdge(new Edge($current, $next_vertex));
 			$current = $next_vertex;
 			$angle = $next_angle;
 			$check++;
 		} while ( ($current != $lowest) && ($check < 200) );
-		echo "</br>check = ".$check."</br>";
 	}
 
 } ?>
