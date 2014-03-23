@@ -21,6 +21,12 @@
 		$graph->addVertex( new Vertex($x, $y) );
 	}
 	
+	//$graph->addVertex(new Vertex(10, 10));
+	//$graph->addVertex(new Vertex(100, 100));
+	//$graph->addVertex(new Vertex(10, 100));
+	//$graph->addVertex(new Vertex(100, 10));
+	//$graph->addVertex(new Vertex(50, 50));
+
 	$graph->addHull();
 
 	$graph->postGraph();

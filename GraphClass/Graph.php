@@ -43,11 +43,17 @@ class Graph {
 	public function getLowestVertex() {
 		$min_y = $this->vertices[0];
 		foreach ($this->vertices as $vertex) {
+			$min_coords = $min_y->coords();
 			// "Lowest" vertex has LARGEST y-coordinate value
-			if ( $vertex->coords()["y"] > $min_y->coords()["y"] ) {
-				$min_y = $vertex;
+			$coords = $vertex->coords();
+			// Prioritize left-vertex when y-coordinates match
+			if ( ( $coords["y"] > $min_coords["y"] ) || 
+				(($coords["y"] == $min_coords["y"]) && 
+				($coords["x"] <= $min_coords["x"])) ) {
+					$min_y = $vertex;
 			}
 		}
+		print_r($min_y->coords());
 		return $min_y;
 	}
 
@@ -57,6 +63,7 @@ class Graph {
 		$min_angle = 2*pi();
 		$current_x = $current->coords()["x"];
 		$current_y = $current->coords()["y"];
+		$epsilon = .001;
 		//echo "STARTING THETA: ".$min_angle."</br>";
 		//echo "STARTING X: ".$current_x."</br>";
 		//echo "STARTING Y: ".$current_y."</br> </br>";
@@ -74,17 +81,20 @@ class Graph {
 				//echo "HEIGHT: " . $diff_y . "</br>";
 				//echo "HYPOTENUSE: " . $hypotenuse . "</br>";
 
-				if ( ($vertex_x>$current_x) && ($vertex_y<$current_y) ) {
+				if ( ($vertex_x>$current_x) && ($vertex_y<=$current_y) ) {
 					$theta = asin($diff_y/$hypotenuse);
-				} else if ( ($vertex_x<$current_x) && ($vertex_y<$current_y) ) {
+				} else if ( ($vertex_x<=$current_x) && ($vertex_y<$current_y) ) {
 					$theta = asin($diff_x/$hypotenuse) + pi()/2;
-				} else if ( ($vertex_x<$current_x) && ($vertex_y>$current_y) ) {
+				} else if ( ($vertex_x<$current_x) && ($vertex_y>=$current_y) ) {
 					$theta = asin($diff_y/$hypotenuse) + pi();
-				} else if ( ($vertex_x>$current_x) && ($vertex_y>$current_y) ) {
+				} else if ( ($vertex_x>=$current_x) && ($vertex_y>$current_y) ) {
 					$theta = asin($diff_x/$hypotenuse) + ((3/2) * pi());
 				}
-				//echo "ANGLE: " . $theta/pi() . "</br>";
-				if (($theta < $min_angle) && ($theta > $last_angle)) {
+
+				//echo "ANGLE: " . $theta . "</br>";
+				//echo "Last-angle: " .$last_angle . "</br>";
+				//echo "min-angle: " .$min_angle . "</br>";
+				if (($theta < $min_angle) && ($theta >= $last_angle)) {
 					$min_angle_vertex = $vertex;
 					$min_angle = $theta;
 					//echo "new min angle at (".$vertex_x.", ".$vertex_y.")";
@@ -98,14 +108,18 @@ class Graph {
 		$lowest = $this->getLowestVertex();
 		$current = $lowest;
 		$angle = 0;
+		$check = 0;
 		do {
 			$next = $this->getNextRadialVertex($current, $angle);
 			$next_vertex = $next["vertex"];
+			//echo "Next Vertex is: (". $next_vertex->coords()["x"] . ", " . $next_vertex->coords()["y"] . ") </br>";
 			$next_angle = $next["angle"];
 			$this->addEdge(new Edge($current, $next_vertex));
 			$current = $next_vertex;
 			$angle = $next_angle;
-		} while ($current != $lowest);
+			$check++;
+		} while ( ($current != $lowest) && ($check < 200) );
+		echo "</br>check = ".$check."</br>";
 	}
 
 } ?>
