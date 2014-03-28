@@ -39,6 +39,32 @@ class Graph {
 		$this->storeGraph();
 		echo "<img src='display.php' alt='graph'>";
 	}
+	
+	public function displayGraph() {
+		$image = imagecreate($size, $size);
+		imagesetthickness($image, 2);
+
+		$back = imagecolorallocate($image, 0, 34, 43);
+		$red = imagecolorallocate($image, 255, 0, 0);
+		$blue = imagecolorallocate($image, 128, 229, 255);
+
+		//Paint the edges
+		foreach ($this->edges as $line) {
+			$coords = $line->getCoords();
+			ImageLine( $image, 
+				$coords["v1"]["x"], $coords["v1"]["y"],
+				$coords["v2"]["x"], $coords["v2"]["y"],
+				$red );
+		}
+
+		//Paint the points
+		foreach ($this->vertices as $point) {
+			ImageFilledEllipse($image, $point->coords()["x"], 
+				$point->coords()["y"], 6, 6, $blue);
+		}
+		
+
+	}
 
 	public function getLowestVertex() {
 		$min_y = $this->vertices[0];
