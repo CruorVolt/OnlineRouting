@@ -11,7 +11,7 @@ class Edge {
 		$this->v2 = $vertex_2;
 	}
 
-	public function getCoords() {
+	public function coords() {
 		return array( "v1" => $this->v1->coords(),
 			      "v2" => $this->v2->coords() );
 	}

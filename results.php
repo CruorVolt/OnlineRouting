@@ -1,6 +1,7 @@
 <?
 	include_once 'GraphClass/Graph.php';
 	include_once 'GraphClass/Vertex.php';
+	include_once 'GraphClass/GraphImage.php';
 	session_start();
 ?>
 
@@ -28,8 +29,8 @@
 	//$graph->addVertex(new Vertex(50, 50));
 
 	$graph->addHull();
+	$image = new GraphImage($graph);
 
-	$graph->postGraph();
 ?>
 
 </br>
