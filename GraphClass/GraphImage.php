@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+#session_start();
 
 include_once 'Vertex.php';
 include_once 'Edge.php';
@@ -47,8 +47,11 @@ class GraphImage {
 
 		//Paint the points
 		foreach ($vertices as $point) {
-			ImageFilledEllipse($image, $point->coords()["x"], 
-				$point->coords()["y"], 6, 6, $blue);
+			$coords = $point->coords();
+			ImageFilledEllipse($image, 
+				$coords["x"], 
+				$coords["y"], 
+				6, 6, $blue);
 		}
 
 		//border

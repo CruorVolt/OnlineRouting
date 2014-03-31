@@ -1,5 +1,5 @@
 <?php 
-session_start();
+//session_start();
 
 include_once 'Vertex.php';
 include_once 'Edge.php';
@@ -34,9 +34,9 @@ class Graph {
 		$min_y = $this->vertices[0];
 		foreach ($this->vertices as $vertex) {
 			$min_coords = $min_y->coords();
-			// "Lowest" vertex has LARGEST y-coordinate value
+			/* "Lowest" vertex has LARGEST y-coordinate value */
 			$coords = $vertex->coords();
-			// Prioritize left-vertex when y-coordinates match
+			/* Prioritize left-vertex when y-coordinates match */
 			if ( ( $coords["y"] > $min_coords["y"] ) || 
 				(($coords["y"] == $min_coords["y"]) && 
 				($coords["x"] <= $min_coords["x"])) ) {
@@ -46,17 +46,19 @@ class Graph {
 		return $min_y;
 	}
 
-	//Return next counter-clockwise radial vertex from input vertex
+	/* Return next counter-clockwise radial vertex from input vertex */
 	public function getNextRadialVertex(Vertex $current, $last_angle) {
 		$min_angle_vertex = $this->vertices[0];
 		$min_angle = 2*pi();
-		$current_x = $current->coords()["x"];
-		$current_y = $current->coords()["y"];
+		$c_coords = $current->coords();
+		$current_x = $c_coords["x"];
+		$current_y = $c_coords["y"];
 		$epsilon = .001;
 		foreach ($this->vertices as $vertex) {
 			if ($vertex != $current) {
-				$vertex_x = $vertex->coords()["x"];
-				$vertex_y = $vertex->coords()["y"];
+				$v_coords = $vertex->coords();
+				$vertex_x = $v_coords["x"];
+				$vertex_y = $v_coords["y"];
 				$diff_x = abs($current_x - $vertex_x);
 				$diff_y = abs($current_y - $vertex_y);
 				$hypotenuse = sqrt( pow($diff_x, 2) + pow($diff_y, 2) );

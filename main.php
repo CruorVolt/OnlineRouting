@@ -1,9 +1,6 @@
-<? 
+<?php
 	session_start();
 
-	include_once 'GraphClass/Vertex.php';
-	include_once'GraphClass/Edge.php';
-	include_once'GraphClass/Graph.php';
 ?>
 
 <html>
@@ -22,8 +19,8 @@
 
 
 <body>
-<?
-	echo "<h2>ONLINE ROUTING</h2>";
+<?php
+	echo '<h2>ONLINE ROUTING</h2>';
 ?>
 
 
