@@ -1,5 +1,4 @@
 <?php 
-//session_start();
 
 include_once 'Vertex.php';
 include_once 'Edge.php';
@@ -9,9 +8,14 @@ class Graph {
 	private $edges = array();
 	private $vertices = array();
 
-	public function __construct($vertex_array, $edges_array) {
+	public $size;
+
+	public function __construct($gridsize = 550, 
+				$vertex_array = array(), 
+				$edges_array = array() ) {
 		$this->edges = $edges_array;
 		$this->vertices = $vertex_array;
+		$this->size=$gridsize;
 	}
 
 	public function addEdge($edge) {
@@ -30,6 +34,7 @@ class Graph {
 		return $this->vertices;
 	}
 
+	/* Get a starging vertex for convex-hull procedure */
 	public function getLowestVertex() {
 		$min_y = $this->vertices[0];
 		foreach ($this->vertices as $vertex) {
@@ -81,6 +86,7 @@ class Graph {
 		return array("vertex"=>$min_angle_vertex, "angle"=>$min_angle);
 	}
 
+	/* Add a convex-hull to the graph */
 	public function addHull() {
 		$lowest = $this->getLowestVertex();
 		$current = $lowest;
@@ -96,6 +102,5 @@ class Graph {
 			$check++;
 		} while ( ($current != $lowest) && ($check < 200) );
 	}
-
-} ?>
-
+} 
+?>
