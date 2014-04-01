@@ -18,6 +18,15 @@ class Graph {
 		$this->size=$gridsize;
 	}
 
+	public function display() {
+		if (session_id() == "") { //There is no active session
+			session_start();
+		}
+		$stored_graph = serialize($this);
+		$_SESSION['graph'] = $stored_graph;
+		echo "<img src='../image.php' alt='graph'>";
+	}
+
 	public function addEdge($edge) {
 		$this->edges[] = $edge;
 	}

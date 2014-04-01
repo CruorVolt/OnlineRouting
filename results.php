@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	include_once 'GraphClass/Graph.php';
 ?>
 
@@ -20,11 +19,13 @@
 		$graph->addVertex( new Vertex($x, $y) );
 	}
 
+	//------------------------------------------------------
+	//------Compute algorithms/add edges to graph here------
 	$graph->addHull();
-	$stored_graph = serialize($graph);
-	$_SESSION['graph'] = $stored_graph;
-	echo "</br>";
-	echo "<img src='image.php'>";
+	//------------------------------------------------------
+	//------------------------------------------------------
+
+	$graph->display();
 
 ?>
 
