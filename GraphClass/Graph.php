@@ -43,6 +43,10 @@ class Graph {
 		return $this->vertices;
 	}
 
+	public function resetEdges() {
+		$this->edges = array();
+	}
+
 	/* Get a starging vertex for convex-hull procedure */
 	public function getLowestVertex() {
 		$min_y = $this->vertices[0];

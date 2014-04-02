@@ -1,5 +1,6 @@
 <?php
 	include_once 'GraphClass/Graph.php';
+	include_once 'Algorithms/Deluanay.php';
 ?>
 
 <head>
@@ -19,8 +20,11 @@
 		$graph->addVertex( new Vertex($x, $y) );
 	}
 
+	$graph = Deluanay::triangulate($graph);
+
+	/*
 	//------------------------------------------------------
-	//------Compute algorithms/add edges to graph here------
+	//------TEST DELUANAY TRIANGULATION---------------------
 	$graph_test = new Graph(500);
 
 	$v_0 = new Vertex(439,250);
@@ -71,8 +75,9 @@
 	$graph_test->display();
 	//------------------------------------------------------
 	//------------------------------------------------------
+	*/
 
-	//$graph->display();
+	$graph->display();
 
 ?>
 
