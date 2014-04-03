@@ -42,12 +42,15 @@ foreach ($graph->getTriangles() as $triangle) {
 			$coords["v1"]["x"], $coords["v1"]["y"],
 			$coords["v2"]["x"], $coords["v2"]["y"],
 			$red );
+	}
 	
 	//Paint the circumcircles
 	$radius = $triangle->c_radius;
-	$diameter = $radius*2;
-	$c_coords = $triangle->c_circumcenter->coords();
-	imageellipse($image, $c_coords["x"], $c_coords["y"], $diameter, $diameter, $darkblue);
+	if ($raidus < 1000) { // Visual bug with larger circles
+		$diameter = $radius*2;
+		$c_coords = $triangle->c_circumcenter->coords();
+		imageellipse($image, $c_coords["x"], $c_coords["y"], 
+			$diameter, $diameter, $darkblue);
 	}
 }
 

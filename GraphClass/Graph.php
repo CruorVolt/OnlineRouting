@@ -20,6 +20,12 @@ class Graph {
 		$this->size=$gridsize;
 	}
 
+	public function spit() {
+		echo "Vertices: " . count($this->vertices) . "</br>";
+		echo "Raw Edges: " . count($this->edges) . "</br>";
+		echo "Triangles: " . count($this->triangles) . "</br>";
+	}
+
 	public function display() {
 		if (session_id() == "") { //There is no active session
 			session_start();
