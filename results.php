@@ -1,6 +1,8 @@
 <?php
 	include_once 'GraphClass/Graph.php';
+	include_once 'GraphClass/Triangle.php';
 	include_once 'Algorithms/Deluanay.php';
+	include_once 'Algorithms/ConvexHull.php';
 ?>
 
 <head>
@@ -19,6 +21,7 @@
 		$y = rand(2, $imagesize-2);
 		$graph->addVertex( new Vertex($x, $y) );
 	}
+	$graph->removeDuplicateVertices();
 
 	$graph = Deluanay::triangulate($graph);
 
