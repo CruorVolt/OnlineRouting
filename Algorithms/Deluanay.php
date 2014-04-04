@@ -40,41 +40,60 @@ class Deluanay {
 		//--------------------------------------------------------------------
 		*/
 
-		//Initialize triangle lise
 		$triangle_buffer = array();
-   		//add supertriangle vertices to the end of the vertex list
+   		// Last three vertices are outlier vertices
 		array_push($vertices, $outlier_1, $outlier_2, $outlier_3);
-   		//add the supertriangle to the triangle list
+		// Initial super-triangle
 		$triangle_buffer[] = $super;
-		//for each sample point in the vertex list
+
 		foreach ($vertices as $vertex) {
-		  	//initialize the edge buffer
 			$edge_buffer = array();
-		  	//for each triangle currently in the triangle list
-			$t = count($triangle_buffer);
-			for ($i = 0; $i < $t; $i++) {
-				 //calculate the triangle circumcircle center and radius
-				 //if the point lies in the triangle circumcircle then
-				if ($triangle_buffer[$i]->isInCircle($vertex)) {
-				    //add the three triangle edges to the edge buffer
-					$t_edges = $triangle_buffer[$i]->getEdges();
+			foreach ($triangle_buffer as $key => &$triangle) {
+				// Check for circumcirlce overlap
+				if ($triangle->isInCircle($vertex)) {
+					// Found overlap: Add to edgebuffer
+					$t_edges = $triangle->getEdges();
 					foreach ($t_edges as $t_edge) {
 						$edge_buffer[] = $t_edge;
 					}
-				    	//remove the triangle from the triangle list
-					//array_splice($triangle_buffer, $i, 1);
-					//$i--;
-				} //endif
-			} //endfor
-		      //delete all doubly specified edges from the edge buffer
-			 //this leaves the edges of the enclosing polygon only
-		      //add to the triangle list all triangles formed between the point 
-			 //and the edges of the enclosing polygon
-		} //endfor
-		   //remove any triangles from the triangle list that use the supertriangle vertices
-		   //remove the supertriangle vertices from the vertex list
-		//end
+					// Remove triangle from future consideration
+					unset($triangle_buffer[$key]);
+				}
+			}
+			$triangle_buffer = array_filter($triangle_buffer); //Remove unset triangles
+			// Reduce edgebuffer to enclosing polygon only
+			
+			$n_edges = count($edge_buffer);
+			for ($i = 0; $i < $n_edges; $i++) {
+				for ($j = $i; $j < $n_edges; $j++) {
+					if ( ($edge_buffer[$i]==$edge_buffer[$j])
+						&& ($i != $j) ) {
+						//unset($edge_buffer[$i]);
+						//unset($edge_buffer[$j]);
+					} 
+				}
+				
+			}
+			$edge_buffer = array_filter($edge_buffer);
 
+			// Triangulate enclosing polygon with new point
+			foreach ($edge_buffer as $new_edge) {
+				$edge_points = $new_edge->getVertices();
+				$new_triangle = new Triangle($vertex,
+					$edge_points["v1"], $edge_points["v2"]);
+				$triangle_buffer[] = $new_triangle; //TODO: Adding this statement caused the divide-by zero error
+			}
+		}
+		// Remove triangles connected to supertriangle
+		foreach ($triangle_buffer as $triangle) {
+			$t_vertices = $triangle->getVertices();
+			if ( !( in_array($outlier_1, $t_vertices) ||
+				in_array($outlier_2, $t_vertices) ||
+				in_array($outlier_3, $t_vertices) ) ) {
+				// Add to graph
+				$graph->addTriangle($triangle);
+			}
+		}
 		return $graph;
 	}
 

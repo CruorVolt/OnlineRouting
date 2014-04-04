@@ -15,8 +15,14 @@ class Edge {
 		return array( "v1" => $this->v1->coords(),
 			      "v2" => $this->v2->coords() );
 	}
+	
+	public function getVertices() {
+		return array("v1" => $this->v1, "v2" => $this->v2);
+	}
 
 	public function __toString() {
 		return "Edge between points ".$this->v1." and ".$this->v2.".";
 	}
 }
+
+?>
