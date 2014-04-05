@@ -5,6 +5,8 @@ require_once 'GraphClass/Graph.php';
 class Deluanay {
 	
 	public static function triangulate(Graph $graph) {
+		error_reporting(E_ALL);
+		ini_set('display_errors', '1');
 		$graph->resetEdges();
 		$vertices = $graph->getVertices();
 		$gridsize = $graph->size;
@@ -42,7 +44,7 @@ class Deluanay {
 
 		$triangle_buffer = array();
    		// Last three vertices are outlier vertices
-		array_push($vertices, $outlier_1, $outlier_2, $outlier_3);
+		//array_push($vertices, $outlier_1, $outlier_2, $outlier_3);
 		// Initial super-triangle
 		$triangle_buffer[] = $super;
 
@@ -50,7 +52,7 @@ class Deluanay {
 			$edge_buffer = array();
 			foreach ($triangle_buffer as $key => &$triangle) {
 				// Check for circumcirlce overlap
-				if ($triangle->isInCircle($vertex)) {
+				if (isset($triangle_buffer[$key]) && $triangle->isInCircle($vertex)) {
 					// Found overlap: Add to edgebuffer
 					$t_edges = $triangle->getEdges();
 					foreach ($t_edges as $t_edge) {
@@ -62,26 +64,28 @@ class Deluanay {
 			}
 			$triangle_buffer = array_filter($triangle_buffer); //Remove unset triangles
 			// Reduce edgebuffer to enclosing polygon only
-			
+			//-----------------------------------------------------------------------
 			$n_edges = count($edge_buffer);
 			for ($i = 0; $i < $n_edges; $i++) {
 				for ($j = $i; $j < $n_edges; $j++) {
-					if ( ($edge_buffer[$i]==$edge_buffer[$j])
+					if ( isset($edge_buffer[$i]) && isset($edge_buffer[$j])
+						&&($edge_buffer[$i]==$edge_buffer[$j])
 						&& ($i != $j) ) {
-						//unset($edge_buffer[$i]);
-						//unset($edge_buffer[$j]);
+						unset($edge_buffer[$i]);
+						unset($edge_buffer[$j]);
 					} 
 				}
 				
 			}
 			$edge_buffer = array_filter($edge_buffer);
+			//-----------------------------------------------------------------------
 
 			// Triangulate enclosing polygon with new point
 			foreach ($edge_buffer as $new_edge) {
 				$edge_points = $new_edge->getVertices();
 				$new_triangle = new Triangle($vertex,
 					$edge_points["v1"], $edge_points["v2"]);
-				$triangle_buffer[] = $new_triangle; //TODO: Adding this statement caused the divide-by zero error
+				$triangle_buffer[] = $new_triangle; //TODO: Adding this statement caused the divide-by zero error -- Outlier vertices!
 			}
 		}
 		// Remove triangles connected to supertriangle

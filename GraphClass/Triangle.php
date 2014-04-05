@@ -52,7 +52,7 @@ class Triangle {
 		$by = $b_coords["y"];
 		$cx = $c_coords["x"];
 		$cy = $c_coords["y"];
-
+		
 		//CALCULATE CIRCUMCENTER VERTEX
 		$d = 2 * ( $ax * ($by - $cy) + $bx * ($cy - $ay) + $cx * ($ay - $by) );
 		
