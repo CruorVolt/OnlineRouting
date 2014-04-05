@@ -44,6 +44,7 @@ foreach ($graph->getTriangles() as $triangle) {
 			$red );
 	}
 	
+	/*
 	//Paint the circumcircles
 	$radius = $triangle->c_radius;
 	if ($raidus < 1000) { // Visual bug with larger circles
@@ -52,6 +53,7 @@ foreach ($graph->getTriangles() as $triangle) {
 		imageellipse($image, $c_coords["x"], $c_coords["y"], 
 			$diameter, $diameter, $darkblue);
 	}
+	*/
 }
 
 //Paint the points

@@ -20,6 +20,19 @@ class Edge {
 		return array("v1" => $this->v1, "v2" => $this->v2);
 	}
 
+	public function isEqual(Edge $edge) {
+		$vertices = $edge->getVertices();
+		$equal = FALSE;
+		if  ( ( ($this->v1 == $vertices["v1"]) 
+			&& ($this->v2 == $vertices["v2"] ) )
+			|| ( ($this->v1 == $vertices["v2"]) 
+			&& ($this->v2 == $vertices["v1"] ) ) ) {
+
+			$equal = TRUE;
+			}
+		return $equal;
+	}
+
 	public function __toString() {
 		return "Edge between points ".$this->v1." and ".$this->v2.".";
 	}

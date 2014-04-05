@@ -23,12 +23,14 @@
 	}
 	$graph->removeDuplicateVertices();
 
+	/*
 	// TEST GRAPH
 	$graph= new Graph($imagesize);
 	$v1 = new Vertex($imagesize/2, $imagesize/4);
 	$v2 = new Vertex($imagesize/2, $imagesize * (3/4));
 	$graph->addVertex($v1);
 	$graph->addVertex($v2);
+	*/
 
 	$graph = Deluanay::triangulate($graph);
 
