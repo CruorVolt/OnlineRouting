@@ -16,39 +16,13 @@ class Deluanay {
 		$outlier_2 = new Vertex(0, $gridsize* 2);
 		$outlier_3 = new Vertex($gridsize * 2, 0);
 		$super = new Triangle($outlier_1, $outlier_2, $outlier_3);
-		$graph->addTriangle($super);
-
-		/*
-		// TESTING CIRCUMCIRCLES ---------------------------------------------
-		//--------------------------------------------------------------------
-		$triangle = new Triangle($vertices[0], $vertices[1], $vertices[2]);
-		echo "Triangle corners: "
-			. $vertices[0] . ", " 
-			. $vertices[1] . ", "
-			. $vertices[2] . "</br>";
-		echo "Radius = " . $triangle->c_radius . "</br>";
-		$graph->addTriangle($triangle);
-		$graph->resetVertices();
-		$center = new Vertex($gridsize/2, $gridsize/2);
-		echo "Center Vertex: " . $center . "</br>";
-		$graph->addVertex($center);
-		if ($triangle->isInCircle($center)) {
-			echo "INSIDE CIRCLE";
-		} else {
-			echo "OUTSIDE CIRCLE";
-		}
-		echo "</br>";
-		//--------------------------------------------------------------------
-		//--------------------------------------------------------------------
-		*/
 
 		$triangle_buffer = array();
-   		// Last three vertices are outlier vertices
-		//array_push($vertices, $outlier_1, $outlier_2, $outlier_3);
 		// Initial super-triangle
 		$triangle_buffer[] = $super;
 
 		foreach ($vertices as $vertex) {
+			echo "NEXT VERTEX = " . $vertex . "</br>";
 			$edge_buffer = array();
 			foreach ($triangle_buffer as $key => &$triangle) {
 				// Check for circumcirlce overlap
@@ -63,8 +37,14 @@ class Deluanay {
 				}
 			}
 			$triangle_buffer = array_filter($triangle_buffer); //Remove unset triangles
+			
+			//PRINTOUT STUFF ---------------------------------------------
+			foreach ($triangle_buffer as $t) {
+				echo ">> " . $t . "</br>";
+			}
+			//PRINTOUT STUFF ---------------------------------------------
+
 			// Reduce edgebuffer to enclosing polygon only
-			//-----------------------------------------------------------------------
 			$n_edges = count($edge_buffer);
 			for ($i = 0; $i < $n_edges; $i++) {
 				for ($j = $i; $j < $n_edges; $j++) {
@@ -78,25 +58,25 @@ class Deluanay {
 				
 			}
 			$edge_buffer = array_filter($edge_buffer);
-			//-----------------------------------------------------------------------
 
 			// Triangulate enclosing polygon with new point
 			foreach ($edge_buffer as $new_edge) {
 				$edge_points = $new_edge->getVertices();
 				$new_triangle = new Triangle($vertex,
 					$edge_points["v1"], $edge_points["v2"]);
-				$triangle_buffer[] = $new_triangle; //TODO: Adding this statement caused the divide-by zero error -- Outlier vertices!
+				$triangle_buffer[] = $new_triangle;
 			}
 		}
 		// Remove triangles connected to supertriangle
 		foreach ($triangle_buffer as $triangle) {
 			$t_vertices = $triangle->getVertices();
-			if ( !( in_array($outlier_1, $t_vertices) ||
-				in_array($outlier_2, $t_vertices) ||
-				in_array($outlier_3, $t_vertices) ) ) {
+			//if ( !( in_array($outlier_1, $t_vertices) ||
+				//in_array($outlier_2, $t_vertices) ||
+				//in_array($outlier_3, $t_vertices) ) ) {
 				// Add to graph
 				$graph->addTriangle($triangle);
-			}
+			
+			//}
 		}
 		return $graph;
 	}

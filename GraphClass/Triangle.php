@@ -20,6 +20,11 @@ class Triangle {
 		$this->constructCircumcircle();
 	}
 
+	public function __toString() {
+		return "Triangle: " . $this->vertex_a . ", " . 
+			$this->vertex_b . ", " . $this->vertex_c;
+	}
+
 	public function getEdges() {
 		return array($this->edge_1, $this->edge_2, $this->edge_3);
 	}
@@ -56,13 +61,17 @@ class Triangle {
 		//CALCULATE CIRCUMCENTER VERTEX
 		$d = 2 * ( $ax * ($by - $cy) + $bx * ($cy - $ay) + $cx * ($ay - $by) );
 		
-		$center_x = ( (pow($ax,2) + pow($ay,2)) * ($by - $cy) 
-			+ (pow($bx,2) + pow($by,2)) * ($cy - $ay) 
-			+ (pow($cx,2) + pow($cy,2)) * ($ay - $by) ) / $d;
+		if ($d != 0) {
+			$center_x = ( (pow($ax,2) + pow($ay,2)) * ($by - $cy) 
+				+ (pow($bx,2) + pow($by,2)) * ($cy - $ay) 
+				+ (pow($cx,2) + pow($cy,2)) * ($ay - $by) ) / $d;
 
-		$center_y = ( (pow($ax,2) + pow($ay,2)) * ($cx - $bx) 
-			+ (pow($bx,2) + pow($by,2)) * ($ax - $cx) 
-			+ (pow($cx,2) + pow($cy,2)) * ($bx - $ax) ) / $d;
+			$center_y = ( (pow($ax,2) + pow($ay,2)) * ($cx - $bx) 
+				+ (pow($bx,2) + pow($by,2)) * ($ax - $cx) 
+				+ (pow($cx,2) + pow($cy,2)) * ($bx - $ax) ) / $d;
+		} else { 
+			echo "3 COLINEAR POINTS!! WHAT SHOULD I DO? </br>";
+		}
 
 		$this->c_circumcenter = new Vertex($center_x, $center_y);
 
