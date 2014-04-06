@@ -3,6 +3,15 @@
 	include_once 'GraphClass/Triangle.php';
 	include_once 'Algorithms/Deluanay.php';
 	include_once 'Algorithms/ConvexHull.php';
+
+	if (isset($_POST['circles']) && $_POST['circles'] == 1) {
+		if (session_id() == "") { //There is no active session
+			session_start();
+		}
+		$_SESSION['circles'] = $circles = 1;
+	} else {
+		$_SESSION['circles'] = $circles = 0;
+	}
 ?>
 
 <head>
@@ -22,15 +31,6 @@
 		$graph->addVertex( new Vertex($x, $y) );
 	}
 	$graph->removeDuplicateVertices();
-
-	/*
-	// TEST GRAPH
-	$graph= new Graph($imagesize);
-	$v1 = new Vertex($imagesize/2, $imagesize/4);
-	$v2 = new Vertex($imagesize/2, $imagesize * (3/4));
-	$graph->addVertex($v1);
-	$graph->addVertex($v2);
-	*/
 
 	$graph = Deluanay::triangulate($graph);
 
@@ -89,7 +89,6 @@
 	//------------------------------------------------------
 	*/
 
-	$graph->spit();
 	$graph->display();
 
 ?>
@@ -99,6 +98,7 @@
 <form name="regenerate" action="results.php" method="post">
 	<input type="hidden" name="maxsize" value=<?php echo $imagesize ?> >
 	<input type="hidden" name="points" value=<?php echo $n ?> >
+	<input type="hidden" name="circles" value=<?php echo $circles ?> >
 	<input class="button" value="RE-GENERATE" type="submit">
 </form>
 

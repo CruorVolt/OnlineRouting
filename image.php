@@ -44,16 +44,16 @@ foreach ($graph->getTriangles() as $triangle) {
 			$red );
 	}
 	
-	/*
 	//Paint the circumcircles
-	$radius = $triangle->c_radius;
-	if ($raidus < 1000) { // Visual bug with larger circles
-		$diameter = $radius*2;
-		$c_coords = $triangle->c_circumcenter->coords();
-		imageellipse($image, $c_coords["x"], $c_coords["y"], 
-			$diameter, $diameter, $darkblue);
+	if ($_SESSION['circles'] == 1) {
+		$radius = $triangle->c_radius;
+		if ($raidus < 1000) { // Visual bug with larger circles
+			$diameter = $radius*2;
+			$c_coords = $triangle->c_circumcenter->coords();
+			imageellipse($image, $c_coords["x"], $c_coords["y"], 
+				$diameter, $diameter, $darkblue);
+		}
 	}
-	*/
 }
 
 //Paint the points
@@ -73,5 +73,8 @@ imageLine($image,$size-1,$size-1,$size-1,0, $darkblue);
 
 imagepng($image);
 imagedestroy($image);
+
+//Reset session (Why is this necessary?);
+$_SESSION['circles'] = 0;
 
 ?>
