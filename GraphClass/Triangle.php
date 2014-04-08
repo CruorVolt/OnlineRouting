@@ -70,7 +70,7 @@ class Triangle {
 				+ (pow($bx,2) + pow($by,2)) * ($ax - $cx) 
 				+ (pow($cx,2) + pow($cy,2)) * ($bx - $ax) ) / $d;
 		} else { 
-			echo "3 COLINEAR POINTS!! WHAT SHOULD I DO? </br>";
+			echo "3 COLINEAR POINTS! WHAT SHOULD I DO? </br>";
 		}
 
 		$this->c_circumcenter = new Vertex($center_x, $center_y);

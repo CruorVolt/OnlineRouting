@@ -40,9 +40,9 @@ class Deluanay {
 
 			// CHECK EDGE BUFFER ----------------------------------------
 			//echo "</br> Edge buffer before removal:</br>";
-			foreach ($edge_buffer as $thing1) {
+			//foreach ($edge_buffer as $thing1) {
 				//echo $thing1 . "</br>";
-			}
+			//}
 			// CHECK EDGE BUFFER ----------------------------------------
 
 			// Reduce edgebuffer to enclosing polygon only
@@ -62,9 +62,9 @@ class Deluanay {
 
 			// CHECK EDGE BUFFER ----------------------------------------
 			//echo "</br> Edge buffer after removal:</br>";
-			foreach ($edge_buffer as $thing1) {
+			//foreach ($edge_buffer as $thing1) {
 				//echo $thing1 . "</br>";
-			}
+			//}
 			// CHECK EDGE BUFFER ----------------------------------------
 
 			// Triangulate enclosing polygon with new point
