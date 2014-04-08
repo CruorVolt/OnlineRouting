@@ -1,7 +1,8 @@
-<?php class Vertex {
+<?php 
+
+class Vertex {
 	private $x = 0;
 	private $y = 0;
-
 	private $neighbors;
 
 	public function __construct($x_coord, $y_coord) {
@@ -18,10 +19,18 @@
 		return array( "x" => $this->x, "y" => $this->y );
 	}
 
+	public function addNeighbor(Vertex $neighbor) {
+		$this->neighbors[] = $neighbor;
+	}
+
 	public function distance(Vertex $destination) {
 		$d_coords = $destination->coords();
 		$dx = $d_coords["x"];
 		$dy = $d_coords["y"];
 		return sqrt( pow(($this->x - $dx),2) + pow(($this->y - $dy),2) );
+	}
+	
+	public function getNeighbors() {
+		return $this->neighbors;
 	}
 } ?>

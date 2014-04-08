@@ -37,10 +37,21 @@ class Graph {
 
 	public function addEdge($edge) {
 		$this->edges[] = $edge;
+
+		$vertices = $edge->getVertices();
+		$v1 = $vertices["v1"];
+		$v2 = $vertices["v2"];
+		$v1_key = $v1->__toString();
+		$v2_key = $v2->__toString();
+
+		$this->vertices[$v1_key]->addNeighbor($v2);
+		$this->vertices[$v2_key]->addNeighbor($v1);
 	}
 
 	public function addVertex($vertex) {
-		$this->vertices[] = $vertex;
+		// Array key is string representation of vertex
+		$this->vertices[$vertex->__toString()] = $vertex; 
+		//$this->vertices[] = $vertex;
 	}
 
 	public function addTriangle($triangle) {
@@ -65,6 +76,15 @@ class Graph {
 
 	public function resetVertices() {
 		$this->vertices = array();
+	}
+
+	public function hasEdge(Edge $new) {
+		foreach ($this->edges as $edge) {
+			if ($edge->isEqual($new)) {
+				return TRUE;
+			}
+		}
+		return FALSE;
 	}
 
 	public function removeDuplicateVertices() {

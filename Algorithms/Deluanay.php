@@ -22,7 +22,6 @@ class Deluanay {
 		$triangle_buffer[] = $super;
 
 		foreach ($vertices as $vertex) {
-			//echo "</br> TRIANGULATING VERTEX: " . $vertex . "</br>";
 			$edge_buffer = array();
 			foreach ($triangle_buffer as $key => &$triangle) {
 				// Check for circumcirlce overlap
@@ -37,13 +36,6 @@ class Deluanay {
 				}
 			}
 			$triangle_buffer = array_filter($triangle_buffer); //Remove unset triangles
-
-			// CHECK EDGE BUFFER ----------------------------------------
-			//echo "</br> Edge buffer before removal:</br>";
-			//foreach ($edge_buffer as $thing1) {
-				//echo $thing1 . "</br>";
-			//}
-			// CHECK EDGE BUFFER ----------------------------------------
 
 			// Reduce edgebuffer to enclosing polygon only
 			$n_edges = count($edge_buffer);
@@ -60,13 +52,6 @@ class Deluanay {
 			}
 			$edge_buffer = array_filter($edge_buffer);
 
-			// CHECK EDGE BUFFER ----------------------------------------
-			//echo "</br> Edge buffer after removal:</br>";
-			//foreach ($edge_buffer as $thing1) {
-				//echo $thing1 . "</br>";
-			//}
-			// CHECK EDGE BUFFER ----------------------------------------
-
 			// Triangulate enclosing polygon with new point
 			//echo "</br> This enclosing polygon : </br>";
 			foreach ($edge_buffer as $new_edge) {
@@ -80,18 +65,25 @@ class Deluanay {
 		// Remove triangles connected to supertriangle
 		foreach ($triangle_buffer as $triangle) {
 			$t_vertices = $triangle->getVertices();
+			$t_edges = $triangle->getEdges();
 			if ( !( in_array($outlier_1, $t_vertices) ||
 				in_array($outlier_2, $t_vertices) ||
 				in_array($outlier_3, $t_vertices) ) ) {
-				// Add to graph
+
+				// ----------ADD WHOLE TRIANGLES TO GRAPH----------
 				$graph->addTriangle($triangle);
+				// ---------------(FOR CIRCUMCIRLCES)--------------
+
+				foreach ($t_edges as $edge) {
+					if (!($graph->hasEdge($edge))) {
+						$graph->addEdge($edge);
+					}
+				}
 			
 			}
 		}
 		return $graph;
 	}
 
-	public static function circumcircle(Triangle $triangle) {
-	}
 }
 ?>

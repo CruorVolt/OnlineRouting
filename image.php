@@ -42,20 +42,10 @@ foreach ($graph->getEdges() as $line) {
 		$red );
 }
 
-//Paint the triangles
-foreach ($graph->getTriangles() as $triangle) {
-	$t_edges = $triangle->getEdges();
-	foreach ($t_edges as $line) {
-		$coords = $line->coords();
-		ImageLine( $image, 
-			$coords["v1"]["x"], $coords["v1"]["y"],
-			$coords["v2"]["x"], $coords["v2"]["y"],
-			$red );
-	}
-	
-	//Paint the circumcircles
-	if ($_SESSION['circles'] == 1) {
-		imagesetthickness($image, 1);
+//Paint the circumcircles
+if ($_SESSION['circles'] == 1) {
+	imagesetthickness($image, 1);
+	foreach ($graph->getTriangles() as $triangle) {
 		$radius = $triangle->c_radius;
 		if ($raidus < 1000) { // Visual bug with larger circles
 			$diameter = $radius*2;
