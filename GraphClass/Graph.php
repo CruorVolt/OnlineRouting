@@ -70,6 +70,23 @@ class Graph {
 		return $this->triangles;
 	}
 
+	public function getPathVertices() {
+		$min_sum = $this->size * 2;
+		$max_sum = 0;
+		foreach ($this->vertices as $vertex) {
+			$coords = $vertex->coords();
+			$sum = $coords["x"] + $coords["y"];
+			if ($sum > $max_sum) {
+				$max_vertex = $vertex;
+				$max_sum = $sum;
+			} else if ($sum < $min_sum) {
+				$min_vertex = $vertex;
+				$min_sum = $sum;
+			}
+		}
+		return array("source"=>$min_vertex, "dest"=>$max_vertex);
+	}
+
 	public function resetEdges() {
 		$this->edges = array();
 	}

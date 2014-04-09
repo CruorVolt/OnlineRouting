@@ -19,6 +19,7 @@ class Vertex {
 		return array( "x" => $this->x, "y" => $this->y );
 	}
 
+	// Graph->addEdge() calls this function
 	public function addNeighbor(Vertex $neighbor) {
 		$this->neighbors[] = $neighbor;
 	}

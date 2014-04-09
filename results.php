@@ -3,6 +3,7 @@
 	include_once 'GraphClass/Triangle.php';
 	include_once 'Algorithms/Deluanay.php';
 	include_once 'Algorithms/ConvexHull.php';
+	include_once 'Algorithms/Dijkstras.php';
 
 	if (isset($_POST['circles']) && $_POST['circles'] == 1) {
 		if (session_id() == "") { //There is no active session
@@ -33,6 +34,10 @@
 	$graph->removeDuplicateVertices();
 
 	$graph = Deluanay::triangulate($graph);
+	
+	$pathVertices = $graph->getPathVertices();
+	$graph = Dijkstras::addShortestPath($graph, 
+		$pathVertices["source"], $pathVertices["dest"]);
 
 	$graph->display();
 
