@@ -24,11 +24,12 @@ $palered = imagecolorallocate($image, 255, 85, 85);
 $blue = imagecolorallocate($image, 128, 229, 255);
 $darkblue = imagecolorallocate($image, 1, 190, 246);
 $white = imagecolorallocate($image, 187, 187, 187);
+$green = imagecolorallocate($image, 77, 255, 0);
 
 //let s:White	=	['#ffffff', '#dddddd', '#bbbbbb']
 //let s:Black	=	['#000000', '#001621', '#1B3641', '#00222B']
-//let s:DarkBlue	=	['#00117B', '#0D4CAD', '#01BEF6']
-//let s:LightBlue	=	['#004455', '#0088AA', '#00CCFF', '#55DDFF', '#80E5FF']
+//let s:DarkBlue=	['#00117B', '#0D4CAD', '#01BEF6']
+//let s:LightBlue=	['#004455', '#0088AA', '#00CCFF', '#55DDFF', '#80E5FF']
 //let s:Red	=	['#2b0000', '#800000', '#AA0000', '#FF0000', '#FF2A2A', '#FF5555']
  
 imagesetthickness($image, 2);
@@ -76,6 +77,16 @@ foreach ($graph->getPath() as $line) {
 		$red );
 }
 imagesetthickness($image, 2);
+
+//Highlght the s,t vertices
+$st = $graph->getPathVertices();
+$s = $st["source"];
+$s_coords = $s->coords();
+$t = $st["dest"];
+$t_coords = $t->coords();
+ImageFilledEllipse($image, $s_coords["x"], $s_coords["y"], 9, 9, $white);
+ImageFilledEllipse($image, $t_coords["x"], $t_coords["y"], 9, 9, $green);
+
 
 //border
 if ($_SESSION['circles'] == 1 ) {

@@ -38,6 +38,21 @@
 	$pathVertices = $graph->getPathVertices();
 	$graph = Dijkstras::addShortestPath($graph, 
 		$pathVertices["source"], $pathVertices["dest"]);
+	
+	// COST OUTPUT ----------------------------------------------------------
+	$path = $graph->getPath();
+	$cost = 0;
+	foreach ($path as $p) {
+		$v = $p->getVertices();
+		$dist = $v["v1"]->distance($v["v2"]);
+		$cost += $dist;
+	}
+	echo "SP Cost = " . number_format($cost) . "</br>";
+
+	$st = $graph->getPathVertices();
+	$dist = $st["source"]->distance($st["dest"]);
+	echo "Euclidian distance = " . number_format($dist) . "</br>";
+	// COST OUTPUT ----------------------------------------------------------
 
 	$graph->display();
 

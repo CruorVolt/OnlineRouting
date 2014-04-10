@@ -4,7 +4,7 @@ class ConvexHull {
 	/* Get a starging vertex for convex-hull procedure */
 	private static function getLowestVertex(Graph $graph) {
 		$vertices = $graph->getVertices();
-		$min_y = $vertices[0];
+		$min_y = reset($vertices);
 		foreach ($vertices as $vertex) {
 			$min_coords = $min_y->coords();
 			/* "Lowest" vertex has LARGEST y-coordinate value */
@@ -22,7 +22,7 @@ class ConvexHull {
 	/* Return next counter-clockwise radial vertex from input vertex */
 	private static function getNextRadialVertex(Graph $graph, Vertex $current, $last_angle) {
 		$vertices = $graph->getVertices();
-		$min_angle_vertex = $vertices[0];
+		$min_angle_vertex = reset($vertices);
 		$min_angle = 2*pi();
 		$c_coords = $current->coords();
 		$current_x = $c_coords["x"];
