@@ -15,6 +15,10 @@ class Vertex {
 		return "(".$this->x.", ".$this->y.")";
 	}
 
+	public function key() {
+		return $this->__toString();
+	}
+
 	public function coords() {
 		return array( "x" => $this->x, "y" => $this->y );
 	}
@@ -33,5 +37,13 @@ class Vertex {
 	
 	public function getNeighbors() {
 		return $this->neighbors;
+	}
+
+	public function isEqual(Vertex $v) {
+		$equal = FALSE;
+		if ( ($this->x == $v->x) && ($this->y == $v->y) ) {
+			$equal = TRUE;
+		}
+		return $equal;
 	}
 } ?>

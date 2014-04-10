@@ -39,7 +39,7 @@ foreach ($graph->getEdges() as $line) {
 	ImageLine( $image, 
 		$coords["v1"]["x"], $coords["v1"]["y"],
 		$coords["v2"]["x"], $coords["v2"]["y"],
-		$red );
+		$darkblue );
 }
 
 //Paint the circumcircles
@@ -63,8 +63,19 @@ foreach ($graph->getVertices() as $point) {
 	ImageFilledEllipse($image, 
 		$coords["x"], 
 		$coords["y"], 
-		6, 6, $darkblue);
+		6, 6, $palered);
 }
+
+//Paint the path
+imagesetthickness($image, 3);
+foreach ($graph->getPath() as $line) {
+	$coords = $line->coords();
+	ImageLine( $image, 
+		$coords["v1"]["x"], $coords["v1"]["y"],
+		$coords["v2"]["x"], $coords["v2"]["y"],
+		$red );
+}
+imagesetthickness($image, 2);
 
 //border
 if ($_SESSION['circles'] == 1 ) {
