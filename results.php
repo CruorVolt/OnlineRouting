@@ -33,26 +33,40 @@
 	}
 	$graph->removeDuplicateVertices();
 
-	$graph = Deluanay::triangulate($graph);
-	
-	$pathVertices = $graph->getPathVertices();
-	$graph = Dijkstras::addShortestPath($graph, 
-		$pathVertices["source"], $pathVertices["dest"]);
-	
-	// COST OUTPUT ----------------------------------------------------------
-	$path = $graph->getPath();
-	$cost = 0;
-	foreach ($path as $p) {
-		$v = $p->getVertices();
-		$dist = $v["v1"]->distance($v["v2"]);
-		$cost += $dist;
-	}
-	echo "SP Cost = " . number_format($cost) . "</br>";
+	//Compute the algorithm in $_POST['algorithm'], alternatively triangulates
+	$algorithm = isset($_POST['algorithm']) ? $_POST['algorithm'] : "deluanay";
+	switch($algorithm) {
+		case "deluanay":
+			$graph = Deluanay::triangulate($graph);
+			break;
+		case "convex":
+			$graph = ConvexHull::addHull($graph);
+			break;
+		case "dijkstras":
+			$graph = Deluanay::triangulate($graph);
+			
+			$pathVertices = $graph->getPathVertices();
+			$graph = Dijkstras::addShortestPath($graph, 
+				$pathVertices["source"], $pathVertices["dest"]);
+			
+			// COST OUTPUT ----------------------------------------------------------
+			$path = $graph->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "SP Cost = " . number_format($cost) . "</br>";
 
-	$st = $graph->getPathVertices();
-	$dist = $st["source"]->distance($st["dest"]);
-	echo "Euclidian distance = " . number_format($dist) . "</br>";
-	// COST OUTPUT ----------------------------------------------------------
+			$st = $graph->getPathVertices();
+			$dist = $st["source"]->distance($st["dest"]);
+			echo "Euclidian distance = " . number_format($dist) . "</br>";
+			// COST OUTPUT ----------------------------------------------------------
+			break;
+		case "none":
+			break;
+	}
 
 	$graph->display();
 
@@ -76,6 +90,7 @@
 	<input type="hidden" name="maxsize" value=<?php echo $imagesize ?> >
 	<input type="hidden" name="points" value=<?php echo $n ?> >
 	<input type="hidden" name="circles" value=<?php echo $circles ?> >
+	<input type="hidden" name="algorithm" value=<?php echo $algorithm ?> >
 	<input class="button" value="RE-GENERATE" type="submit">
 </form>
 

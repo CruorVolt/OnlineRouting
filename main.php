@@ -45,7 +45,16 @@
 		<span id="numberofpoints">55</span>
 	    </td>
 	  </tr> <tr>
-	    <td colspan = "3" align="center" style="font-weight: normal;">
+	    <td>
+		Algorithm:
+	    </td> <td>
+	      <select name="algorithm">
+	        <option value="dijkstras">Dijkstras</option>
+	        <option value="deluanay">Bowyer-Watson</option>
+	        <option value="convex">Jarvis March</option>
+	        <option value="none">None (Points Only)</option>
+	      </select>
+	    </td> <td align="center" style="font-weight: normal;">
 		<input type="checkbox" name="circles" value=1>
 		Show Circumcircles
 	    </td>
