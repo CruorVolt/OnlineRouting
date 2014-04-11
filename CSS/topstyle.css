@@ -41,3 +41,25 @@ h2 {
 	color:#FF0000;
 	text-align:center;
 }
+
+.customSelect select {
+	color:#80E5FF;
+	width: 150px;
+	height: 25px;
+	background: transparent;
+	border: none;
+	-webkit-appearance: none;
+}
+
+.customSelect {
+	border: 1px solid #FF0000;
+	height: 25px;
+	overflow: hidden;
+	background: url(arrow.png) no-repeat 96% ;
+	background-size:15px 15px;
+	width: 120px;
+}
+
+select option {
+	background: #00222B;
+}
