@@ -15,6 +15,7 @@ if ( isset($_SESSION['graph']) ) {
 //Image
 $size = $graph->size;
 $image = imagecreate($size, $size);
+//imageantialias($image, true); //Only works with true-color images
 
 //Colors
 $back = imagecolorallocate($image, 0, 34, 43);
@@ -26,11 +27,11 @@ $darkblue = imagecolorallocate($image, 1, 190, 246);
 $white = imagecolorallocate($image, 187, 187, 187);
 $green = imagecolorallocate($image, 77, 255, 0);
 
-//let s:White	=	['#ffffff', '#dddddd', '#bbbbbb']
-//let s:Black	=	['#000000', '#001621', '#1B3641', '#00222B']
-//let s:DarkBlue=	['#00117B', '#0D4CAD', '#01BEF6']
-//let s:LightBlue=	['#004455', '#0088AA', '#00CCFF', '#55DDFF', '#80E5FF']
-//let s:Red	=	['#2b0000', '#800000', '#AA0000', '#FF0000', '#FF2A2A', '#FF5555']
+//White	=	['#ffffff', '#dddddd', '#bbbbbb']
+//Black	=	['#000000', '#001621', '#1B3641', '#00222B']
+//DarkBlue=	['#00117B', '#0D4CAD', '#01BEF6']
+//LightBlue=	['#004455', '#0088AA', '#00CCFF', '#55DDFF', '#80E5FF']
+//Red	=	['#2b0000', '#800000', '#AA0000', '#FF0000', '#FF2A2A', '#FF5555']
  
 imagesetthickness($image, 2);
  

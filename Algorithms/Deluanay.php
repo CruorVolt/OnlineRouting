@@ -82,6 +82,31 @@ class Deluanay {
 			
 			}
 		}
+
+		/*
+		// Triangulate Outliers --------------------------------------------
+		foreach ($vertices as $vertex) {
+			if ( empty($vertex->getNeighbors()) ) {
+				$min_distance = INF;
+				$min_vertex = new Vertex(0,0);
+				foreach ($vertices as $potential_neighbor) {
+					$distance = $vertex->distance($potential_neighbor);
+					if ( $distance < $min_distance ) {
+						$min_distance = $distance;
+						$min_vertex = $potential_neighbor;
+					}
+				}
+				$graph->addEdge($vertex, $min_vertex); // closest vertex
+				foreach ($min_vertex->getNeighbors() as $neighbor) {
+					$potential_edge = new Edge($vertex, $neighbor);
+					$
+					if ($
+					//CONNECT CLOSEST NON-Conflicting vertex
+				}
+			}
+		}
+		// Triangulate Outliers --------------------------------------------
+		*/
 		return $graph;
 	}
 
