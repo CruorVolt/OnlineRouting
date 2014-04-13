@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	$_SESSION['circles'] = 0;
 
 ?>
 
@@ -20,6 +21,7 @@
 
 <body>
 <?php
+	echo "</br> </br> </br> </br>";
 	echo "<h2>ONLINE ROUTING</h2>";
 ?>
 
@@ -46,21 +48,34 @@
 	    </td>
 	  </tr> <tr>
 	    <td>
-		Algorithm:
+		Algorithm 1:
 	    </td> <td>
 	      <div class="customSelect">
-	      <select name="algorithm">
-	        <option selected value="dijkstras">Dijkstras</option>
+	      <select name="algorithm_1">
+	        <option value="dijkstras">Dijkstras</option>
+	        <option selected value="deluanay">Bowyer-Watson</option>
+	        <option value="convex">Jarvis March</option>
+	        <option value="none">None (Points Only)</option>
+	      </select>
+	      </div>
+	  </tr> <tr>
+	    <td>
+		Algorithm 2:
+	    </td> <td>
+	      <div class="customSelect">
+	      <select name="algorithm_2">
+	        <option selected value="off">Off</option>
+	        <option value="dijkstras">Dijkstras</option>
 	        <option value="deluanay">Bowyer-Watson</option>
 	        <option value="convex">Jarvis March</option>
 	        <option value="none">None (Points Only)</option>
 	      </select>
 	      </div>
+	  </tr> <tr>
 	    </td> <td align="center" style="font-weight: normal;">
 		<input type="checkbox" name="circles" value=1>
 		Show Circumcircles
 	    </td>
-	  </tr>
 	</table>
 
 	<input class="button" type="submit" value="PROCESS GRAPH">

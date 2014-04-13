@@ -8,6 +8,7 @@ class Deluanay {
 		error_reporting(E_ALL);
 		ini_set('display_errors', '1');
 		$graph->resetEdges();
+		$graph->resetTriangles();
 		$vertices = $graph->getVertices();
 		$gridsize = $graph->size;
 		

@@ -27,14 +27,25 @@ class Graph {
 		echo "Triangles: " . count($this->triangles) . "</br>";
 	}
 
-	public function display() {
+	public function display_a() {
 		if (session_id() == "") { //There is no active session
 			session_start();
 		}
 		$stored_graph = serialize($this);
 		$_SESSION['graph'] = $stored_graph;
-		echo "<img src='../image.php' alt='graph'>";
+		echo "<img src='../image_a.php' alt='graph'>";
 	}
+	
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public function display_b() {
+		if (session_id() == "") { //There is no active session
+			session_start();
+		}
+		$stored_graph = serialize($this);
+		$_SESSION['graph_2'] = $stored_graph;
+		echo "<img src='../image_b.php' alt='graph'>";
+	}
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	public function addEdge($edge) {
 		$this->edges[] = $edge;
@@ -100,6 +111,14 @@ class Graph {
 
 	public function resetVertices() {
 		$this->vertices = array();
+	}
+
+	public function resetPath() {
+		$this->path = array();
+	}
+
+	public function resetTriangles() {
+		$this->triangles = array();
 	}
 
 	public function hasEdge(Edge $new) {

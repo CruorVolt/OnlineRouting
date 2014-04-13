@@ -65,7 +65,7 @@ class ConvexHull {
 			$next = ConvexHull::getNextRadialVertex($graph, $current, $angle);
 			$next_vertex = $next["vertex"];
 			$next_angle = $next["angle"];
-			$graph->addEdge(new Edge($current, $next_vertex));
+			$graph->addPathEdge(new Edge($current, $next_vertex));
 			$current = $next_vertex;
 			$angle = $next_angle;
 			$check++;

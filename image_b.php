@@ -6,8 +6,8 @@ ini_set ("display_errors", "0");
 error_reporting(E_ALL);
 header('content-type: image/png');
 
-if ( isset($_SESSION['graph']) ) {
-	$graph = unserialize($_SESSION['graph']);
+if ( isset($_SESSION['graph_2']) ) {
+	$graph = unserialize($_SESSION['graph_2']);
 } else {
 	$graph = new Graph();
 }
@@ -26,6 +26,7 @@ $blue = imagecolorallocate($image, 128, 229, 255);
 $darkblue = imagecolorallocate($image, 1, 190, 246);
 $white = imagecolorallocate($image, 187, 187, 187);
 $green = imagecolorallocate($image, 77, 255, 0);
+$yellow = imagecolorallocate($image, 255, 234, 0);
 
 //White	=	['#ffffff', '#dddddd', '#bbbbbb']
 //Black	=	['#000000', '#001621', '#1B3641', '#00222B']
@@ -65,7 +66,7 @@ foreach ($graph->getVertices() as $point) {
 	ImageFilledEllipse($image, 
 		$coords["x"], 
 		$coords["y"], 
-		6, 6, $palered);
+		5, 5, $red);
 }
 
 //Paint the path
@@ -85,8 +86,8 @@ $s = $st["source"];
 $s_coords = $s->coords();
 $t = $st["dest"];
 $t_coords = $t->coords();
-ImageFilledEllipse($image, $s_coords["x"], $s_coords["y"], 9, 9, $white);
-ImageFilledEllipse($image, $t_coords["x"], $t_coords["y"], 9, 9, $green);
+ImageFilledEllipse($image, $s_coords["x"], $s_coords["y"], 7, 7, $red);
+ImageFilledEllipse($image, $t_coords["x"], $t_coords["y"], 7, 7, $green);
 
 
 //border
@@ -100,8 +101,5 @@ if ($_SESSION['circles'] == 1 ) {
 
 imagepng($image);
 imagedestroy($image);
-
-//Reset session (Why is this necessary?);
-$_SESSION['circles'] = 0;
 
 ?>

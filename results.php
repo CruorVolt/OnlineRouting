@@ -33,14 +33,19 @@
 	}
 	$graph->removeDuplicateVertices();
 
-	//Compute the algorithm in $_POST['algorithm'], alternatively triangulates
-	$algorithm = isset($_POST['algorithm']) ? $_POST['algorithm'] : "deluanay";
-	switch($algorithm) {
+	echo " 	<table> <tr> <td width=" . $imagesize . ">";
+	echo "<font color='yellow'>";
+
+	//Compute the algorithm in $_POST['algorithm_1'], alternatively triangulates
+	$algorithm_1 = isset($_POST['algorithm_1']) ? $_POST['algorithm_1'] : "deluanay";
+	switch($algorithm_1) {
 		case "deluanay":
 			$graph = Deluanay::triangulate($graph);
+			echo "Triangles:   " . count($graph->getTriangles());
 			break;
 		case "convex":
 			$graph = ConvexHull::addHull($graph);
+			echo "Hull Vertices:   " . count($graph->getPath());
 			break;
 		case "dijkstras":
 			$graph = Deluanay::triangulate($graph);
@@ -49,7 +54,6 @@
 			$graph = Dijkstras::addShortestPath($graph, 
 				$pathVertices["source"], $pathVertices["dest"]);
 			
-			// COST OUTPUT ----------------------------------------------------------
 			$path = $graph->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -57,18 +61,67 @@
 				$dist = $v["v1"]->distance($v["v2"]);
 				$cost += $dist;
 			}
-			echo "SP Cost = " . number_format($cost) . "</br>";
-
-			$st = $graph->getPathVertices();
-			$dist = $st["source"]->distance($st["dest"]);
-			echo "Euclidian distance = " . number_format($dist) . "</br>";
-			// COST OUTPUT ----------------------------------------------------------
+			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
+			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "none":
+			echo "Unique Nodes:  " . (count($graph->getVertices()));
 			break;
 	}
 
-	$graph->display();
+	$graph2 = clone $graph;
+
+	echo "</font>";
+	echo "</td> <td width=" . $imagesize . ">";
+	echo "<font color='red'>";
+
+	//Compute the algorithm in $_POST['algorithm_2'], alternatively triangulates
+	$algorithm_2 = isset($_POST['algorithm_2']) ? $_POST['algorithm_2'] : "deluanay";
+	switch($algorithm_2) {
+		case "off":
+			break;
+		case "deluanay":
+			$graph2 = Deluanay::triangulate($graph2);
+			echo "Triangles:   " . count($graph2->getTriangles());
+			break;
+		case "convex":
+			$graph2->resetPath();
+			$graph2->resetEdges();
+			$graph2->resetTriangles();
+			$graph2 = ConvexHull::addHull($graph2);
+			echo "Hull Vertices:   " . count($graph2->getPath());
+			break;
+		case "dijkstras":
+			$graph2 = Deluanay::triangulate($graph2);
+			$pathVertices = $graph2->getPathVertices();
+			$graph2 = Dijkstras::addShortestPath($graph2, 
+				$pathVertices["source"], $pathVertices["dest"]);
+			
+			// COST OUTPUT ----------------------------------------------------------
+			$path = $graph2->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
+			echo "Internal Nodes Visited:   " . (count($path) - 1);
+			// COST OUTPUT ----------------------------------------------------------
+			break;
+		case "none":
+			echo "Unique Nodes:  " . (count($graph2->getVertices()));
+			break;
+	}
+
+	echo "</font>";
+	echo "</tr> <tr> <td width=" . $imagesize . ">";
+	$graph->display_a();
+	if ($algorithm_2 != "off") {
+		echo "</td> <td width=" . $imagesize . ">";
+		$graph2->display_b();
+	}
+	echo "</td></tr> </table>";
 
 	/*
 	// TESTING --------------------------------------------------------
@@ -90,7 +143,8 @@
 	<input type="hidden" name="maxsize" value=<?php echo $imagesize ?> >
 	<input type="hidden" name="points" value=<?php echo $n ?> >
 	<input type="hidden" name="circles" value=<?php echo $circles ?> >
-	<input type="hidden" name="algorithm" value=<?php echo $algorithm ?> >
+	<input type="hidden" name="algorithm_1" value=<?php echo $algorithm_1 ?> >
+	<input type="hidden" name="algorithm_2" value=<?php echo $algorithm_2 ?> >
 	<input class="button" value="RE-GENERATE" type="submit">
 </form>
 
