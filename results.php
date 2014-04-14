@@ -70,6 +70,9 @@
 	}
 
 	$graph2 = clone $graph;
+	$graph2->resetEdges();
+	$graph2->resetPath();
+	$graph2->resetTriangles();
 
 	echo "</font>";
 	echo "</td> <td width=" . $imagesize . ">";
@@ -85,9 +88,6 @@
 			echo "Triangles:   " . count($graph2->getTriangles());
 			break;
 		case "convex":
-			$graph2->resetPath();
-			$graph2->resetEdges();
-			$graph2->resetTriangles();
 			$graph2 = ConvexHull::addHull($graph2);
 			echo "Hull Vertices:   " . count($graph2->getPath());
 			break;
