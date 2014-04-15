@@ -58,7 +58,7 @@ class Triangle {
 		$cx = $c_coords["x"];
 		$cy = $c_coords["y"];
 		
-		//CALCULATE CIRCUMCENTER VERTEX
+		//Calculate circumcenter vertex
 		$d = 2 * ( $ax * ($by - $cy) + $bx * ($cy - $ay) + $cx * ($ay - $by) );
 		
 		if ($d != 0) {
@@ -70,12 +70,11 @@ class Triangle {
 				+ (pow($bx,2) + pow($by,2)) * ($ax - $cx) 
 				+ (pow($cx,2) + pow($cy,2)) * ($bx - $ax) ) / $d;
 		} else { 
-			echo "3 COLINEAR POINTS! WHAT SHOULD I DO? </br>";
+			echo "ERROR: 3 colienear points </br>";
 		}
 
 		$this->c_circumcenter = new Vertex($center_x, $center_y);
 
-		//CALCULATE CIRCUMCIRCLE RADIUS
 		$this->c_radius = sqrt( pow(($ax-$center_x),2) + pow(($ay-$center_y),2) );
 	}
 }

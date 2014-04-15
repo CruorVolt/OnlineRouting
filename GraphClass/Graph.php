@@ -27,6 +27,7 @@ class Graph {
 		echo "Triangles: " . count($this->triangles) . "</br>";
 	}
 
+	// output stream: image_a.php
 	public function display_a() {
 		if (session_id() == "") { //There is no active session
 			session_start();
@@ -36,7 +37,7 @@ class Graph {
 		echo "<img src='../image_a.php' alt='graph'>";
 	}
 	
-	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// output stream: image_b.php
 	public function display_b() {
 		if (session_id() == "") { //There is no active session
 			session_start();
@@ -45,7 +46,6 @@ class Graph {
 		$_SESSION['graph_2'] = $stored_graph;
 		echo "<img src='../image_b.php' alt='graph'>";
 	}
-	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	public function addEdge($edge) {
 		$this->edges[] = $edge;

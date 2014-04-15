@@ -4,6 +4,7 @@
 	include_once 'Algorithms/Deluanay.php';
 	include_once 'Algorithms/ConvexHull.php';
 	include_once 'Algorithms/Dijkstras.php';
+	include_once 'Algorithms/Midpoint.php';
 
 	if (isset($_POST['circles']) && $_POST['circles'] == 1) {
 		if (session_id() == "") { //There is no active session
@@ -25,13 +26,16 @@
 	$n = isset($_POST['points']) ? $_POST['points'] : 50;
 
 	$graph = new Graph($imagesize);
+	$graph2 = new Graph($imagesize);
 
 	for ($i = 1; $i <= $n; $i++) {
 		$x = rand(2, $imagesize-2);
 		$y = rand(2, $imagesize-2);
 		$graph->addVertex( new Vertex($x, $y) );
+		$graph2->addVertex( new Vertex($x, $y) );
 	}
 	$graph->removeDuplicateVertices();
+	$graph2->removeDuplicateVertices();
 
 	echo " 	<table> <tr> <td width=" . $imagesize . ">";
 	echo "<font color='yellow'>";
@@ -64,15 +68,25 @@
 			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
+		case "midpoint":
+			$graph = Deluanay::triangulate($graph);
+			$pathVertices = $graph->getPathVertices();
+			Midpoint::addPath($graph,
+				$pathVertices["source"], $pathVertices["dest"]);
+			$path = $graph->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "Midpoint Cost:   " . number_format($cost) . "</br>";
+			echo "Internal Nodes Visited:   " . (count($path) - 1);
+			break;
 		case "none":
 			echo "Unique Nodes:  " . (count($graph->getVertices()));
 			break;
 	}
-
-	$graph2 = clone $graph;
-	$graph2->resetEdges();
-	$graph2->resetPath();
-	$graph2->resetTriangles();
 
 	echo "</font>";
 	echo "</td> <td width=" . $imagesize . ">";
@@ -108,6 +122,21 @@
 			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			// COST OUTPUT ----------------------------------------------------------
+			break;
+		case "midpoint":
+			$graph2 = Deluanay::triangulate($graph2);
+			$pathVertices = $graph2->getPathVertices();
+			Midpoint::addPath($graph2,
+				$pathVertices["source"], $pathVertices["dest"]);
+			$path = $graph2->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "Midpoint Cost:   " . number_format($cost) . "</br>";
+			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "none":
 			echo "Unique Nodes:  " . (count($graph2->getVertices()));

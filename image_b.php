@@ -86,7 +86,7 @@ $s = $st["source"];
 $s_coords = $s->coords();
 $t = $st["dest"];
 $t_coords = $t->coords();
-ImageFilledEllipse($image, $s_coords["x"], $s_coords["y"], 7, 7, $red);
+ImageFilledEllipse($image, $s_coords["x"], $s_coords["y"], 7, 7, $yellow);
 ImageFilledEllipse($image, $t_coords["x"], $t_coords["y"], 7, 7, $green);
 
 

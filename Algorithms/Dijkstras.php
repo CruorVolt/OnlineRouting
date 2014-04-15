@@ -7,7 +7,7 @@ class Dijkstras {
 	public static function addShortestPath(Graph $graph, 
 		Vertex $origin, Vertex $destination) {
 
- 		//WILL TAKE SAME KEYS AS VERTICES
+ 		//WILL TAKE SAME KEYS AS VERTEX ARRAY
 		$visited = array();
 		$distance = array();
 		$previous = array();
@@ -35,6 +35,7 @@ class Dijkstras {
 					$min = $d;
 				}
 			}
+			//TODO: can exit early if we found destination vertex
 			unset($vertices[$min_vertex->key()]);
 			$vertices = array_filter($vertices);
 			if ($distance[$min_vertex->key()] == INF) {
@@ -47,11 +48,11 @@ class Dijkstras {
 				if ($route < $distance[$neighbor->key()]) {
 					$distance[$neighbor->key()] = $route;
 					$previous[$neighbor->key()] = $min_vertex;
-					//decrease-key TODO: WHAT?
+					//TODO: change key priority in queue here
 				}
 			}
 		}
-		//Here distance and previous are correct for all nodes
+		// $distance[] and $previous[] now correct for all nodes
 		$path = array();
 		$current = $destination;
 		while ($previous[$current->key()] != NULL) {

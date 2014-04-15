@@ -54,7 +54,6 @@ class Deluanay {
 			$edge_buffer = array_filter($edge_buffer);
 
 			// Triangulate enclosing polygon with new point
-			//echo "</br> This enclosing polygon : </br>";
 			foreach ($edge_buffer as $new_edge) {
 				//echo $new_edge . "</br>";
 				$edge_points = $new_edge->getVertices();
@@ -71,9 +70,7 @@ class Deluanay {
 				in_array($outlier_2, $t_vertices) ||
 				in_array($outlier_3, $t_vertices) ) ) {
 
-				// ----------ADD WHOLE TRIANGLES TO GRAPH----------
 				$graph->addTriangle($triangle);
-				// ---------------(FOR CIRCUMCIRLCES)--------------
 
 				foreach ($t_edges as $edge) {
 					if (!($graph->hasEdge($edge))) {

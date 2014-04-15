@@ -53,6 +53,7 @@
 	      <div class="customSelect">
 	      <select name="algorithm_1">
 	        <option value="dijkstras">Dijkstras</option>
+		<option value="midpoint">Midpoint</option>
 	        <option selected value="deluanay">Bowyer-Watson</option>
 	        <option value="convex">Jarvis March</option>
 	        <option value="none">None (Points Only)</option>
@@ -66,6 +67,7 @@
 	      <select name="algorithm_2">
 	        <option selected value="off">Off</option>
 	        <option value="dijkstras">Dijkstras</option>
+		<option value="midpoint">Midpoint</option>
 	        <option value="deluanay">Bowyer-Watson</option>
 	        <option value="convex">Jarvis March</option>
 	        <option value="none">None (Points Only)</option>
