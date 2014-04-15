@@ -9,6 +9,7 @@ class Deluanay {
 		ini_set('display_errors', '1');
 		$graph->resetEdges();
 		$graph->resetTriangles();
+		$graph->resetPath();
 		$vertices = $graph->getVertices();
 		$gridsize = $graph->size;
 		
@@ -105,7 +106,7 @@ class Deluanay {
 		}
 		// Triangulate Outliers --------------------------------------------
 		*/
-		return $graph;
+		//return $graph;
 	}
 
 }

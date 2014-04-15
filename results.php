@@ -37,6 +37,9 @@
 	$graph->removeDuplicateVertices();
 	$graph2->removeDuplicateVertices();
 
+	Deluanay::triangulate($graph);
+	$graph2 = clone $graph;
+
 	echo " 	<table> <tr> <td width=" . $imagesize . ">";
 	echo "<font color='yellow'>";
 
@@ -44,18 +47,17 @@
 	$algorithm_1 = isset($_POST['algorithm_1']) ? $_POST['algorithm_1'] : "deluanay";
 	switch($algorithm_1) {
 		case "deluanay":
-			$graph = Deluanay::triangulate($graph);
 			echo "Triangles:   " . count($graph->getTriangles());
 			break;
 		case "convex":
-			$graph = ConvexHull::addHull($graph);
+			$graph->resetEdges();
+			$graph->resetTriangles();
+			ConvexHull::addHull($graph);
 			echo "Hull Vertices:   " . count($graph->getPath());
 			break;
 		case "dijkstras":
-			$graph = Deluanay::triangulate($graph);
-			
 			$pathVertices = $graph->getPathVertices();
-			$graph = Dijkstras::addShortestPath($graph, 
+			Dijkstras::addShortestPath($graph, 
 				$pathVertices["source"], $pathVertices["dest"]);
 			
 			$path = $graph->getPath();
@@ -69,7 +71,6 @@
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
-			$graph = Deluanay::triangulate($graph);
 			$pathVertices = $graph->getPathVertices();
 			Midpoint::addPath($graph,
 				$pathVertices["source"], $pathVertices["dest"]);
@@ -84,6 +85,9 @@
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "none":
+			$graph->resetEdges();
+			$graph->resetPath();
+			$graph->resetTriangles();
 			echo "Unique Nodes:  " . (count($graph->getVertices()));
 			break;
 	}
@@ -98,20 +102,19 @@
 		case "off":
 			break;
 		case "deluanay":
-			$graph2 = Deluanay::triangulate($graph2);
 			echo "Triangles:   " . count($graph2->getTriangles());
 			break;
 		case "convex":
-			$graph2 = ConvexHull::addHull($graph2);
+			$graph2->resetEdges();
+			$graph2->resetTriangles();
+			ConvexHull::addHull($graph2);
 			echo "Hull Vertices:   " . count($graph2->getPath());
 			break;
 		case "dijkstras":
-			$graph2 = Deluanay::triangulate($graph2);
 			$pathVertices = $graph2->getPathVertices();
-			$graph2 = Dijkstras::addShortestPath($graph2, 
+			Dijkstras::addShortestPath($graph2, 
 				$pathVertices["source"], $pathVertices["dest"]);
 			
-			// COST OUTPUT ----------------------------------------------------------
 			$path = $graph2->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -121,10 +124,8 @@
 			}
 			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
-			// COST OUTPUT ----------------------------------------------------------
 			break;
 		case "midpoint":
-			$graph2 = Deluanay::triangulate($graph2);
 			$pathVertices = $graph2->getPathVertices();
 			Midpoint::addPath($graph2,
 				$pathVertices["source"], $pathVertices["dest"]);
@@ -139,6 +140,9 @@
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "none":
+			$graph2->resetEdges();
+			$graph2->resetPath();
+			$graph2->resetTriangles();
 			echo "Unique Nodes:  " . (count($graph2->getVertices()));
 			break;
 	}

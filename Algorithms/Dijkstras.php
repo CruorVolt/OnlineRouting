@@ -61,7 +61,7 @@ class Dijkstras {
 			$current = $previous[$current->key()];
 		}
 		
-		return $graph;
+		//return $graph;
 	}
 }
 
