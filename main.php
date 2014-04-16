@@ -56,6 +56,7 @@
 		<option value="midpoint">Midpoint</option>
 	        <option selected value="deluanay">Bowyer-Watson</option>
 	        <option value="convex">Jarvis March</option>
+	        <option value="voronoi">Voronoi Overlay</option>
 	        <option value="none">None (Points Only)</option>
 	      </select>
 	      </div>
@@ -70,6 +71,7 @@
 		<option value="midpoint">Midpoint</option>
 	        <option value="deluanay">Bowyer-Watson</option>
 	        <option value="convex">Jarvis March</option>
+	        <option value="voronoi">Voronoi Overlay</option>
 	        <option value="none">None (Points Only)</option>
 	      </select>
 	      </div>

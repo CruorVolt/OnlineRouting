@@ -5,6 +5,7 @@
 	include_once 'Algorithms/ConvexHull.php';
 	include_once 'Algorithms/Dijkstras.php';
 	include_once 'Algorithms/Midpoint.php';
+	include_once 'Algorithms/Voronoi.php';
 
 	if (isset($_POST['circles']) && $_POST['circles'] == 1) {
 		if (session_id() == "") { //There is no active session
@@ -84,6 +85,8 @@
 			echo "Midpoint Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
+		case "voronoi":
+			Voronoi::addCells($graph);
 		case "none":
 			$graph->resetEdges();
 			$graph->resetPath();
@@ -139,6 +142,8 @@
 			echo "Midpoint Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
+		case "voronoi":
+			Voronoi::addCells($graph2);
 		case "none":
 			$graph2->resetEdges();
 			$graph2->resetPath();
