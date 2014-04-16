@@ -77,6 +77,18 @@ class Triangle {
 
 		$this->c_radius = sqrt( pow(($ax-$center_x),2) + pow(($ay-$center_y),2) );
 	}
+
+	public function sharesEdge(Triangle $triangle) {
+		foreach ($this->getEdges() as $edge) {
+			foreach ($triangle->getEdges() as $duplicate) {
+				if ($edge->isEqual($duplicate)) {
+					return TRUE;
+				}
+			}
+		}
+		return FALSE;
+	}
+
 }
 
 ?>
