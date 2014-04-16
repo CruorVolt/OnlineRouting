@@ -67,7 +67,7 @@
 				$dist = $v["v1"]->distance($v["v2"]);
 				$cost += $dist;
 			}
-			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
+			echo "DIJKSTRAS Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
@@ -81,7 +81,7 @@
 				$dist = $v["v1"]->distance($v["v2"]);
 				$cost += $dist;
 			}
-			echo "Midpoint Cost:   " . number_format($cost) . "</br>";
+			echo "MIDPOINT Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "none":
@@ -122,7 +122,7 @@
 				$dist = $v["v1"]->distance($v["v2"]);
 				$cost += $dist;
 			}
-			echo "Shortest Path Cost:   " . number_format($cost) . "</br>";
+			echo "DIJKSTRAS Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
@@ -136,7 +136,7 @@
 				$dist = $v["v1"]->distance($v["v2"]);
 				$cost += $dist;
 			}
-			echo "Midpoint Cost:   " . number_format($cost) . "</br>";
+			echo "MIDPOINT Path Cost:   " . number_format($cost) . "</br>";
 			echo "Internal Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "none":

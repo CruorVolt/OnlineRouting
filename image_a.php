@@ -14,11 +14,15 @@ if ( isset($_SESSION['graph']) ) {
 
 //Image
 $size = $graph->size;
-$image = imagecreate($size, $size);
-//imageantialias($image, true); //Only works with true-color images
+$image = imagecreatetruecolor($size, $size);
+//imagesavealpha($image, true);
+//$transparent = imagecolorallocate($image, 0, 0, 0, 127);
+imageantialias($image, true); //Only works with true-color images
 
 //Colors
 $back = imagecolorallocate($image, 0, 34, 43);
+imagefill($image, 0, 0, $back);
+
 $red = imagecolorallocate($image, 255, 0, 0);
 $darkred = imagecolorallocate($image, 170, 0, 0);
 $palered = imagecolorallocate($image, 255, 85, 85);
@@ -68,6 +72,8 @@ foreach ($graph->getVertices() as $point) {
 		$coords["y"], 
 		5, 5, $yellow);
 }
+
+imageantialias($image, false); //Turn off smoothing
 
 //Paint the path
 imagesetthickness($image, 3);
