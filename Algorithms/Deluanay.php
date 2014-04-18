@@ -3,6 +3,13 @@
 require_once 'GraphClass/Graph.php';
 
 class Deluanay {
+
+//REAL dMax = (dx dy) ? dx : dy; 
+//REAL xMid = (xMax + xMin) / 2.0; 
+//REAL yMid = (yMax + yMin) / 2.0; 
+//vSuper[0] = Vertex(xMid - 20 * dMax, yMid - dMax); 
+//vSuper[1] = Vertex(xMid, yMid + 20 * dMax); 
+//vSuper[2] = Vertex(xMid + 20 * dMax,yMid - dMax); 
 	
 	public static function triangulate(Graph $graph) {
 		error_reporting(E_ALL);
@@ -14,9 +21,9 @@ class Deluanay {
 		$gridsize = $graph->size;
 		
 		// Outlier vertices for starting triangulation
-		$outlier_1 = new Vertex(0, 0);
-		$outlier_2 = new Vertex(0, $gridsize* 2);
-		$outlier_3 = new Vertex($gridsize * 2, 0);
+		$outlier_1 = new Vertex($gridsize/2, -($gridsize * 10000));
+		$outlier_2 = new Vertex( -($gridsize * 10000), $gridsize * 10000);
+		$outlier_3 = new Vertex( $gridsize * 10000, $gridsize * 10000);
 		$super = new Triangle($outlier_1, $outlier_2, $outlier_3);
 
 		$triangle_buffer = array();
@@ -81,33 +88,6 @@ class Deluanay {
 			
 			}
 		}
-
-		/*
-		// Triangulate Outliers --------------------------------------------
-		foreach ($vertices as $vertex) {
-			if ( empty($vertex->getNeighbors()) ) {
-				$min_distance = INF;
-				$min_vertex = new Vertex(0,0);
-				foreach ($vertices as $potential_neighbor) {
-					$distance = $vertex->distance($potential_neighbor);
-					if ( $distance < $min_distance ) {
-						$min_distance = $distance;
-						$min_vertex = $potential_neighbor;
-					}
-				}
-				$graph->addEdge($vertex, $min_vertex); // closest vertex
-				foreach ($min_vertex->getNeighbors() as $neighbor) {
-					$potential_edge = new Edge($vertex, $neighbor);
-					$
-					if ($
-					//CONNECT CLOSEST NON-Conflicting vertex
-				}
-			}
-		}
-		// Triangulate Outliers --------------------------------------------
-		*/
-		//return $graph;
 	}
-
 }
 ?>

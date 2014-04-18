@@ -34,7 +34,7 @@ class Graph {
 		}
 		$stored_graph = serialize($this);
 		$_SESSION['graph'] = $stored_graph;
-		echo "<img src='../image_a.php' alt='graph'>";
+		echo "<img src='image_a.php' alt='graph'>";
 	}
 	
 	// output stream: image_b.php
@@ -44,7 +44,7 @@ class Graph {
 		}
 		$stored_graph = serialize($this);
 		$_SESSION['graph_2'] = $stored_graph;
-		echo "<img src='../image_b.php' alt='graph'>";
+		echo "<img src='image_b.php' alt='graph'>";
 	}
 
 	public function addEdge($edge) {
@@ -64,7 +64,7 @@ class Graph {
 		//$this->vertices[] = $vertex;
 	}
 
-	public function addPathEdge($edge) {
+	public function addPathEdge(Edge $edge) {
 		$this->path[] = $edge;
 	}
 

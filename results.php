@@ -1,10 +1,12 @@
 <?php
 	include_once 'GraphClass/Graph.php';
 	include_once 'GraphClass/Triangle.php';
+
 	include_once 'Algorithms/Deluanay.php';
 	include_once 'Algorithms/ConvexHull.php';
 	include_once 'Algorithms/Dijkstras.php';
 	include_once 'Algorithms/Midpoint.php';
+	include_once 'Algorithms/TwoStep.php';
 	include_once 'Algorithms/Voronoi.php';
 
 	if (isset($_POST['circles']) && $_POST['circles'] == 1) {
@@ -69,7 +71,7 @@
 				$cost += $dist;
 			}
 			echo "DIJKSTRAS Path Cost:   " . number_format($cost) . "</br>";
-			echo "Internal Nodes Visited:   " . (count($path) - 1);
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
 			$pathVertices = $graph->getPathVertices();
@@ -83,10 +85,29 @@
 				$cost += $dist;
 			}
 			echo "MIDPOINT Path Cost:   " . number_format($cost) . "</br>";
-			echo "Internal Nodes Visited:   " . (count($path) - 1);
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
-		case "voronoi":
+		case "twostep":
+			$pathVertices = $graph->getPathVertices();
+			TwoStep::addPath($graph,
+				$pathVertices["source"], $pathVertices["dest"]);
+			$path = $graph->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "TWO-STEP Path Cost:   " . number_format($cost) . "</br>";
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
+			break;
+		case "voronoi_overlay":
 			Voronoi::addCells($graph);
+			break;
+		case "voronoi_only":
+			Voronoi::addCells($graph);
+			$graph->resetEdges();
+			break;
 		case "none":
 			$graph->resetEdges();
 			$graph->resetPath();
@@ -126,7 +147,7 @@
 				$cost += $dist;
 			}
 			echo "DIJKSTRAS Path Cost:   " . number_format($cost) . "</br>";
-			echo "Internal Nodes Visited:   " . (count($path) - 1);
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
 			$pathVertices = $graph2->getPathVertices();
@@ -140,10 +161,29 @@
 				$cost += $dist;
 			}
 			echo "MIDPOINT Path Cost:   " . number_format($cost) . "</br>";
-			echo "Internal Nodes Visited:   " . (count($path) - 1);
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
-		case "voronoi":
+		case "twostep":
+			$pathVertices = $graph2->getPathVertices();
+			TwoStep::addPath($graph2,
+				$pathVertices["source"], $pathVertices["dest"]);
+			$path = $graph2->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "TWO-STEP Path Cost:   " . number_format($cost) . "</br>";
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
+			break;
+		case "voronoi_overlay":
 			Voronoi::addCells($graph2);
+			break;
+		case "voronoi_only":
+			Voronoi::addCells($graph2);
+			$graph2->resetEdges();
+			break;
 		case "none":
 			$graph2->resetEdges();
 			$graph2->resetPath();

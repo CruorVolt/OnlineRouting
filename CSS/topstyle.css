@@ -16,6 +16,7 @@ table {
 
 td {
 	text-align:center;
+	padding:5px;
 }
 
 
@@ -48,7 +49,7 @@ h2 {
 
 .customSelect select {
 	color:#80E5FF;
-	width: 190px;
+	width: 210px;
 	height: 25px;
 	background: transparent;
 	border: none;
@@ -61,7 +62,7 @@ h2 {
 	overflow: hidden;
 	background: url(arrow.png) no-repeat 96% ;
 	background-size:15px 15px;
-	width: 170px;
+	width: 190px;
 }
 
 select option {

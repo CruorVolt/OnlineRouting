@@ -53,10 +53,12 @@
 	      <div class="customSelect">
 	      <select name="algorithm_1">
 	        <option value="dijkstras">Dijkstras</option>
-		<option value="midpoint">Midpoint</option>
-	        <option selected value="deluanay">Bowyer-Watson</option>
-	        <option value="convex">Jarvis March</option>
-	        <option value="voronoi">Voronoi Overlay</option>
+		<option value="midpoint">Midpoint Routing</option>
+		<option value="twostep">Two Step Routing</option>
+	        <option selected value="deluanay">Deluanay: Bowyer-Watson</option>
+	        <option value="convex">Hull: Jarvis March</option>
+	        <option value="voronoi_overlay">Voronoi: Overlay</option>
+	        <option value="voronoi_only">Voronoi: Cells Only </option>
 	        <option value="none">None (Points Only)</option>
 	      </select>
 	      </div>
@@ -68,10 +70,12 @@
 	      <select name="algorithm_2">
 	        <option selected value="off">Off</option>
 	        <option value="dijkstras">Dijkstras</option>
-		<option value="midpoint">Midpoint</option>
-	        <option value="deluanay">Bowyer-Watson</option>
-	        <option value="convex">Jarvis March</option>
-	        <option value="voronoi">Voronoi Overlay</option>
+		<option value="midpoint">Midpoint Routing</option>
+		<option value="twostep">Two Step Routing</option>
+	        <option value="deluanay">Deluanay: Bowyer-Watson</option>
+	        <option value="convex">Hull: Jarvis March</option>
+	        <option value="voronoi_overlay">Voronoi: Overlay</option>
+	        <option value="voronoi_only">Voronoi: Cells Only </option>
 	        <option value="none">None (Points Only)</option>
 	      </select>
 	      </div>
