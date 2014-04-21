@@ -55,6 +55,7 @@
 	        <option value="dijkstras">Dijkstras</option>
 		<option value="midpoint">Midpoint Routing</option>
 		<option value="twostep">Two Step Routing</option>
+		<option value="apex_angle">Apex Angle Routing</option>
 	        <option selected value="deluanay">Deluanay: Bowyer-Watson</option>
 	        <option value="convex">Hull: Jarvis March</option>
 	        <option value="voronoi_overlay">Voronoi: Overlay</option>
@@ -72,6 +73,7 @@
 	        <option value="dijkstras">Dijkstras</option>
 		<option value="midpoint">Midpoint Routing</option>
 		<option value="twostep">Two Step Routing</option>
+		<option value="apex_angle">Apex Angle Routing</option>
 	        <option value="deluanay">Deluanay: Bowyer-Watson</option>
 	        <option value="convex">Hull: Jarvis March</option>
 	        <option value="voronoi_overlay">Voronoi: Overlay</option>

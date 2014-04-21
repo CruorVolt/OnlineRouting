@@ -27,9 +27,8 @@ class ConvexHull {
 		$c_coords = $current->coords();
 		$current_x = $c_coords["x"];
 		$current_y = $c_coords["y"];
-		$epsilon = .001;
 		foreach ($vertices as $vertex) {
-			if ($vertex != $current) {
+			if ( !($vertex->isEqual($current)) ) {
 				$v_coords = $vertex->coords();
 				$vertex_x = $v_coords["x"];
 				$vertex_y = $v_coords["y"];
@@ -69,7 +68,7 @@ class ConvexHull {
 			$current = $next_vertex;
 			$angle = $next_angle;
 			$check++;
-		} while ( ($current != $lowest) && ($check < 200) );
+		} while ( (!($current->isEqual($lowest)) ) && ($check < 200) );
 	//return $graph;
 	}
 }

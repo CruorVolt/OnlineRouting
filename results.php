@@ -7,6 +7,7 @@
 	include_once 'Algorithms/Dijkstras.php';
 	include_once 'Algorithms/Midpoint.php';
 	include_once 'Algorithms/TwoStep.php';
+	include_once 'Algorithms/ApexAngle.php';
 	include_once 'Algorithms/Voronoi.php';
 
 	if (isset($_POST['circles']) && $_POST['circles'] == 1) {
@@ -101,6 +102,20 @@
 			echo "TWO-STEP Path Cost:   " . number_format($cost) . "</br>";
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
+		case "apex_angle":
+			$pathVertices = $graph->getPathVertices();
+			ApexAngle::addPath($graph, 
+				$pathVertices["source"], $pathVertices["dest"]);
+			$path = $graph->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "APEX-ANGLE Path Cost:   " . number_format($cost) . "</br>";
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
+			break;
 		case "voronoi_overlay":
 			Voronoi::addCells($graph);
 			break;
@@ -175,6 +190,20 @@
 				$cost += $dist;
 			}
 			echo "TWO-STEP Path Cost:   " . number_format($cost) . "</br>";
+			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
+			break;
+		case "apex_angle":
+			$pathVertices = $graph2->getPathVertices();
+			ApexAngle::addPath($graph2,
+				$pathVertices["source"], $pathVertices["dest"]);
+			$path = $graph2->getPath();
+			$cost = 0;
+			foreach ($path as $p) {
+				$v = $p->getVertices();
+				$dist = $v["v1"]->distance($v["v2"]);
+				$cost += $dist;
+			}
+			echo "APEX-ANGLE Path Cost:   " . number_format($cost) . "</br>";
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "voronoi_overlay":

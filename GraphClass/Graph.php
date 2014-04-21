@@ -91,6 +91,8 @@ class Graph {
 	public function getPathVertices() {
 		$min_sum = $this->size * 2;
 		$max_sum = 0;
+		$min_vertex = reset($this->vertices);
+		$max_vertex = reset($this->vertices);
 		foreach ($this->vertices as $vertex) {
 			$coords = $vertex->coords();
 			$sum = $coords["x"] + $coords["y"];
@@ -130,6 +132,7 @@ class Graph {
 		return FALSE;
 	}
 
+	//Obsolete: now only functions properly before graph has any neighbor information
 	public function removeDuplicateVertices() {
 		$this->vertices = array_unique($this->vertices);
 	}
