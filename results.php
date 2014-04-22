@@ -43,6 +43,9 @@
 
 	Deluanay::triangulate($graph);
 	$graph2 = clone $graph;
+	$pathVertices = $graph->getPathVertices();
+	$source = $pathVertices["source"];
+	$dest = $pathVertices["dest"];
 
 	echo " 	<table> <tr> <td width=" . $imagesize . ">";
 	echo "<font color='yellow'>";
@@ -60,9 +63,7 @@
 			echo "Hull Vertices:   " . count($graph->getPath());
 			break;
 		case "dijkstras":
-			$pathVertices = $graph->getPathVertices();
-			Dijkstras::addShortestPath($graph, 
-				$pathVertices["source"], $pathVertices["dest"]);
+			Dijkstras::addShortestPath($graph, $source, $dest);
 			
 			$path = $graph->getPath();
 			$cost = 0;
@@ -75,9 +76,7 @@
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
-			$pathVertices = $graph->getPathVertices();
-			Midpoint::addPath($graph,
-				$pathVertices["source"], $pathVertices["dest"]);
+			Midpoint::addPath($graph, $source, $dest);
 			$path = $graph->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -89,9 +88,7 @@
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "twostep":
-			$pathVertices = $graph->getPathVertices();
-			TwoStep::addPath($graph,
-				$pathVertices["source"], $pathVertices["dest"]);
+			TwoStep::addPath($graph, $source, $dest);
 			$path = $graph->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -103,9 +100,7 @@
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "apex_angle":
-			$pathVertices = $graph->getPathVertices();
-			ApexAngle::addPath($graph, 
-				$pathVertices["source"], $pathVertices["dest"]);
+			ApexAngle::addPath($graph, $source, $dest);
 			$path = $graph->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -150,10 +145,7 @@
 			echo "Hull Vertices:   " . count($graph2->getPath());
 			break;
 		case "dijkstras":
-			$pathVertices = $graph2->getPathVertices();
-			Dijkstras::addShortestPath($graph2, 
-				$pathVertices["source"], $pathVertices["dest"]);
-			
+			Dijkstras::addShortestPath($graph2, $source, $dest);
 			$path = $graph2->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -165,9 +157,7 @@
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "midpoint":
-			$pathVertices = $graph2->getPathVertices();
-			Midpoint::addPath($graph2,
-				$pathVertices["source"], $pathVertices["dest"]);
+			Midpoint::addPath($graph2, $source, $dest);
 			$path = $graph2->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -179,9 +169,7 @@
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "twostep":
-			$pathVertices = $graph2->getPathVertices();
-			TwoStep::addPath($graph2,
-				$pathVertices["source"], $pathVertices["dest"]);
+			TwoStep::addPath($graph2, $source, $dest);
 			$path = $graph2->getPath();
 			$cost = 0;
 			foreach ($path as $p) {
@@ -193,9 +181,7 @@
 			echo "Intermediate Nodes Visited:   " . (count($path) - 1);
 			break;
 		case "apex_angle":
-			$pathVertices = $graph2->getPathVertices();
-			ApexAngle::addPath($graph2,
-				$pathVertices["source"], $pathVertices["dest"]);
+			ApexAngle::addPath($graph2, $source, $dest);
 			$path = $graph2->getPath();
 			$cost = 0;
 			foreach ($path as $p) {

@@ -38,8 +38,6 @@ $yellow = imagecolorallocate($image, 255, 255, 0);
 //LightBlue=	['#004455', '#0088AA', '#00CCFF', '#55DDFF', '#80E5FF']
 //Red	=	['#2b0000', '#800000', '#AA0000', '#FF0000', '#FF2A2A', '#FF5555']
  
-imagesetthickness($image, 2);
- 
 //Paint the edges
 foreach ($graph->getEdges() as $line) {
 	$coords = $line->coords();
@@ -48,6 +46,8 @@ foreach ($graph->getEdges() as $line) {
 		$coords["v2"]["x"], $coords["v2"]["y"],
 		$darkblue );
 }
+
+imagesetthickness($image, 2);
 
 //Paint the circumcircles
 if ($_SESSION['circles'] == 1) {
@@ -63,6 +63,7 @@ if ($_SESSION['circles'] == 1) {
 	}
 	imagesetthickness($image, 2);
 }
+
 
 //Paint the points
 foreach ($graph->getVertices() as $point) {
