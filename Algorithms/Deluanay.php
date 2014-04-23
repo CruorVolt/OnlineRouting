@@ -4,13 +4,6 @@ require_once 'GraphClass/Graph.php';
 
 class Deluanay {
 
-//REAL dMax = (dx dy) ? dx : dy; 
-//REAL xMid = (xMax + xMin) / 2.0; 
-//REAL yMid = (yMax + yMin) / 2.0; 
-//vSuper[0] = Vertex(xMid - 20 * dMax, yMid - dMax); 
-//vSuper[1] = Vertex(xMid, yMid + 20 * dMax); 
-//vSuper[2] = Vertex(xMid + 20 * dMax,yMid - dMax); 
-	
 	public static function triangulate(Graph $graph) {
 		error_reporting(E_ALL);
 		ini_set('display_errors', '1');

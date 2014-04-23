@@ -215,19 +215,6 @@
 		$graph2->display_b();
 	}
 	echo "</td></tr> </table>";
-
-	/*
-	// TESTING --------------------------------------------------------
-	echo "</br> EDGES: " . count($graph->getEdges()) . "</br>";
-	echo "TRIANGLES: " . count($graph->getTriangles()) . "</br>";
-	echo "VERTICES: " . count($graph->getVertices()) . "</br>";
-	foreach ($graph->getVertices() as $v) {
-		foreach ($v->getNeighbors() as $nb) {
-			echo $v . " connected to " . $nb . "</br>";
-		}
-	}
-	// TESTING --------------------------------------------------------
-	*/
 ?>
 
 </br>

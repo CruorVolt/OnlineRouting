@@ -69,7 +69,6 @@ class ConvexHull {
 			$angle = $next_angle;
 			$check++;
 		} while ( (!($current->isEqual($lowest)) ) && ($check < 200) );
-	//return $graph;
 	}
 }
 ?>

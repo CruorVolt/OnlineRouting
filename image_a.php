@@ -15,8 +15,6 @@ if ( isset($_SESSION['graph']) ) {
 //Image
 $size = $graph->size;
 $image = imagecreatetruecolor($size, $size);
-//imagesavealpha($image, true);
-//$transparent = imagecolorallocate($image, 0, 0, 0, 127);
 imageantialias($image, true); //Only works with true-color images
 
 //Colors
@@ -32,12 +30,6 @@ $white = imagecolorallocate($image, 187, 187, 187);
 $green = imagecolorallocate($image, 77, 255, 0);
 $yellow = imagecolorallocate($image, 255, 255, 0);
 
-//White	=	['#ffffff', '#dddddd', '#bbbbbb']
-//Black	=	['#000000', '#001621', '#1B3641', '#00222B']
-//DarkBlue=	['#00117B', '#0D4CAD', '#01BEF6']
-//LightBlue=	['#004455', '#0088AA', '#00CCFF', '#55DDFF', '#80E5FF']
-//Red	=	['#2b0000', '#800000', '#AA0000', '#FF0000', '#FF2A2A', '#FF5555']
- 
 //Paint the edges
 foreach ($graph->getEdges() as $line) {
 	$coords = $line->coords();

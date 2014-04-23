@@ -14,14 +14,13 @@ class Dijkstras {
 
 		$vertices = $graph->getVertices();
 		$n = count($vertices);
-		// BUILD A QUEUE -----------------------------------
-		$vertex_queue = new SplPriorityQueue();
-		// BUILD A QUEUE -----------------------------------
-
+		// Unimplemented: BUILD A QUEUE --------------------
+		//$vertex_queue = new SplPriorityQueue();
+		//--------------------------------------------------
 		foreach ($vertices as $vertex) {
 			$distance[$vertex->key()] = INF; 
 			$previous[$vertex->key()] = NULL;
-			$vertex_queue->insert($vertex, $n);
+			//$vertex_queue->insert($vertex, $n);
 		}
 
 		$distance[$origin->key()] = 0;

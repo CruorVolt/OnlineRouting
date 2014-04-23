@@ -61,7 +61,6 @@ class Graph {
 	public function addVertex($vertex) {
 		// Array key is string representation of vertex
 		$this->vertices[$vertex->key()] = $vertex; 
-		//$this->vertices[] = $vertex;
 	}
 
 	public function addPathEdge(Edge $edge) {
@@ -132,7 +131,7 @@ class Graph {
 		return FALSE;
 	}
 
-	//Obsolete: now only functions properly before graph has any neighbor information
+	//Use with caution: now only functions properly before graph has any neighbor information
 	public function removeDuplicateVertices() {
 		$this->vertices = array_unique($this->vertices);
 	}
