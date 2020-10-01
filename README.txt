@@ -4,7 +4,7 @@
 ======= Anders Lundgren, Agata Gruza ========
 =============================================
 
-A web application for comparing online routing algorithms on Deluanay triangulations in PHP.
+A web application for comparing online routing algorithms on Delaunay triangulations in PHP.
 
 Built for CSCI 532 - Algorithms at Montana State University, Spring 2014
 
